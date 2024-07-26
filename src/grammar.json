@@ -25,7 +25,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "_hoonExpression"
+              "name": "_hoonTall"
             }
           ]
         },
@@ -43,7 +43,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_hoonExpression"
+                    "name": "_hoonTall"
                   },
                   {
                     "type": "SYMBOL",
@@ -68,22 +68,18 @@
         }
       ]
     },
-    "_hoonExpression": {
+    "_hoonTall": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_hoonTall"
+          "name": "_runeTall"
         },
         {
           "type": "SYMBOL",
           "name": "_hoonWide"
         }
       ]
-    },
-    "_hoonTall": {
-      "type": "SYMBOL",
-      "name": "_runeTall"
     },
     "_hoonWide": {
       "type": "CHOICE",
@@ -487,7 +483,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_hoonExpression"
+          "name": "_hoonTall"
         }
       ]
     },
@@ -504,7 +500,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_hoonExpression"
+          "name": "_hoonTall"
         }
       ]
     },
@@ -536,8 +532,8 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "=="
+          "type": "SYMBOL",
+          "name": "seriesTerminator"
         }
       ]
     },

@@ -5,17 +5,17 @@ module.exports = grammar({
       source_file: ($) =>
         seq(
           optional($._Gap),
-          choice($._sailExpression, $._hoonExpression),
-          repeat(seq($._Gap, choice($._hoonExpression, $._sailExpression))),
+          choice($._sailExpression, $._hoonTall),
+          repeat(seq($._Gap, choice($._hoonTall, $._sailExpression))),
           optional($._Gap)
         ),
   
-      _hoonExpression: ($) => choice(
-        $._hoonTall,
-        $._hoonWide
-      ),
+      // _hoonExpression: ($) => choice(
+      //   $._hoonTall,
+      //   $._hoonWide
+      // ),
   
-      _hoonTall: ($) => $._runeTall,
+      _hoonTall: ($) => choice($._runeTall, $._hoonWide),
   
       _hoonWide: ($) => choice($._runeWide, $._value, $._irregularForms),
   
@@ -82,13 +82,13 @@ module.exports = grammar({
     )),
   
       // Sail-specific runes
-      sailMiclus: ($) => seq(";+", $._Gap, $._hoonExpression),
-      sailMictar: ($) => seq(";*", $._Gap, $._hoonExpression),
+      sailMiclus: ($) => seq(";+", $._Gap, $._hoonTall),
+      sailMictar: ($) => seq(";*", $._Gap, $._hoonTall),
       sailMictis: ($) => seq(
         ";=",
         $._Gap,
         repeat1(seq($._sailExpression, $._Gap)),
-        "=="
+        $.seriesTerminator,
       ),
       sailMicfas: ($) => seq(";/", $._space, $.string),
   
