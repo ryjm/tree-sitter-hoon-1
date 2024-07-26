@@ -5,8 +5,10 @@ module.exports = grammar({
       source_file: ($) =>
         seq(
           optional($._Gap),
-          choice($._sailExpression, $._hoonTall),
-          repeat(seq($._Gap, choice($._hoonTall, $._sailExpression))),
+          $._hoonTall,
+          repeat(seq($._Gap, $._hoonTall)),
+          // choice($._sailExpression, $._hoonTall),
+          // repeat(seq($._Gap, choice($._hoonTall, $._sailExpression))),
           optional($._Gap)
         ),
   
@@ -15,7 +17,7 @@ module.exports = grammar({
       //   $._hoonWide
       // ),
   
-      _hoonTall: ($) => choice($._runeTall, $._hoonWide),
+      _hoonTall: ($) => choice($._runeTall, $._hoonWide, $._sailExpression),
   
       _hoonWide: ($) => choice($._runeWide, $._value, $._irregularForms),
   
@@ -24,10 +26,19 @@ module.exports = grammar({
       $.sailTag,
       $.sailText,
       $.sailInterpolation,
-      prec(3, $.sailMiclus),
-     $.sailMictar,
-      $.sailMictis,
-      $.sailMicfas
+      $.mictisTall,
+      $.mictisWide,
+      $.miclusTall,
+      $.miclusWide,
+      $.mictarTall,
+      $.mictarWide,
+      $.mictisTall,
+      $.mictisWide,
+      // $.sailMiclus,
+     // $.sailMictar,
+      
+      // $.sailMictis,
+      // $.sailMicfas
     ),
 
     sailTag: ($) => prec.right(1, seq(
@@ -82,15 +93,15 @@ module.exports = grammar({
     )),
   
       // Sail-specific runes
-      sailMiclus: ($) => seq(";+", $._Gap, $._hoonTall),
-      sailMictar: ($) => seq(";*", $._Gap, $._hoonTall),
-      sailMictis: ($) => seq(
-        ";=",
-        $._Gap,
-        repeat1(seq($._sailExpression, $._Gap)),
-        $.seriesTerminator,
-      ),
-      sailMicfas: ($) => seq(";/", $._space, $.string),
+      // sailMiclus: ($) => seq(";+", $._Gap, $._hoonTall),
+      // sailMictar: ($) => seq(";*", $._Gap, $._hoonTall),
+      // sailMictis: ($) => seq(
+      //   ";=",
+      //   $._Gap,
+      //   repeat1(seq($._sailExpression, $._Gap)),
+      //   $.seriesTerminator,
+      // ),
+      // sailMicfas: ($) => seq(";/", $._space, $.string),
   
       // Modify existing rules to avoid conflicts
       _value: ($) => choice(
@@ -145,10 +156,6 @@ module.exports = grammar({
           
     
     
-  
-  
-  
-  
       _specTall: ($) =>
       choice(
         $._bucTall,
@@ -2120,6 +2127,8 @@ module.exports = grammar({
     [$.censigWide, $.term],
     [$.typeUnion, $.mold],
     [$._termWide, $.wingPath],
+    [$._runeTall, $._sailExpression],
+    [$._runeWide, $._sailExpression],
   ],
   externals: ($) => [$.indent, $._stringStart, $.stringContent, $._stringEnd],
 });

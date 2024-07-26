@@ -17,17 +17,8 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_sailExpression"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_hoonTall"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_hoonTall"
         },
         {
           "type": "REPEAT",
@@ -39,17 +30,8 @@
                 "name": "_Gap"
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_hoonTall"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_sailExpression"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_hoonTall"
               }
             ]
           }
@@ -78,6 +60,10 @@
         {
           "type": "SYMBOL",
           "name": "_hoonWide"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_sailExpression"
         }
       ]
     },
@@ -114,24 +100,36 @@
           "name": "sailInterpolation"
         },
         {
-          "type": "PREC",
-          "value": 3,
-          "content": {
-            "type": "SYMBOL",
-            "name": "sailMiclus"
-          }
+          "type": "SYMBOL",
+          "name": "mictisTall"
         },
         {
           "type": "SYMBOL",
-          "name": "sailMictar"
+          "name": "mictisWide"
         },
         {
           "type": "SYMBOL",
-          "name": "sailMictis"
+          "name": "miclusTall"
         },
         {
           "type": "SYMBOL",
-          "name": "sailMicfas"
+          "name": "miclusWide"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mictarTall"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mictarWide"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mictisTall"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mictisWide"
         }
       ]
     },
@@ -469,90 +467,6 @@
           }
         ]
       }
-    },
-    "sailMiclus": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": ";+"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_Gap"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_hoonTall"
-        }
-      ]
-    },
-    "sailMictar": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": ";*"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_Gap"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_hoonTall"
-        }
-      ]
-    },
-    "sailMictis": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": ";="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_Gap"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_sailExpression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_Gap"
-              }
-            ]
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "seriesTerminator"
-        }
-      ]
-    },
-    "sailMicfas": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": ";/"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_space"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string"
-        }
-      ]
     },
     "_value": {
       "type": "CHOICE",
@@ -13280,6 +13194,14 @@
     [
       "_termWide",
       "wingPath"
+    ],
+    [
+      "_runeTall",
+      "_sailExpression"
+    ],
+    [
+      "_runeWide",
+      "_sailExpression"
     ]
   ],
   "precedences": [],
