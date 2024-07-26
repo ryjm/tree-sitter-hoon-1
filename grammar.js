@@ -723,18 +723,24 @@ module.exports = grammar({
       seq(alias(".=", $.rune), $._Gap, $._hoonTall, $._Gap, $._hoonTall),
     dotwutTall: ($) => seq(alias(".?", $.rune), $._Gap, $._hoonTall),
 
-    faslusTall: ($) => seq(
-      alias("/+", $.rune),
-      $._Gap,
-      $.faslusImport,
-      repeat(seq(",", $._Gap, $.faslusImport))
-    ),
+    faslusTall: ($) =>
+      seq(
+        alias("/+", $.rune),
+        $._Gap,
+        optional("*"),
+        $.name,
+        optional(seq("=", $.name)),
+        repeat(
+          seq(
+            ",",
+            choice($._Gap, $._space),
+            optional("*"),
+            $.name,
+            optional(seq("=", $.name))
+          )
+        )
+      ),
 
-    faslusImport: ($) => seq(
-      optional("*"),
-      $.name,
-      optional(seq("=", $.name))
-    ),
     fashepTall: ($) =>
       seq(
         alias("/-", $.rune),

@@ -61426,21 +61426,6 @@
     }
   },
   {
-    "type": "faslusImport",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "faslusTall",
     "named": true,
     "fields": {},
@@ -61449,7 +61434,7 @@
       "required": true,
       "types": [
         {
-          "type": "faslusImport",
+          "type": "name",
           "named": true
         },
         {
