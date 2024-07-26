@@ -5,7 +5,7 @@ module.exports = grammar({
       source_file: ($) =>
         seq(
           optional($._Gap),
-          choice($._hoonTall, $._hoonExpression),
+          choice($._sailExpression, $._hoonExpression),
           repeat(seq($._Gap, choice($._hoonExpression, $._sailExpression))),
           optional($._Gap)
         ),
