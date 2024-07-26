@@ -17,17 +17,30 @@
           ]
         },
         {
+          "type": "SYMBOL",
+          "name": "_hoonTall"
+        },
+        {
           "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_hoonExpression"
+                "name": "_Gap"
               },
               {
-                "type": "SYMBOL",
-                "name": "_sailExpression"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_hoonExpression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_sailExpression"
+                  }
+                ]
               }
             ]
           }
