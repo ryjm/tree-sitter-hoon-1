@@ -114,31 +114,33 @@ module.exports = grammar({
         $.phonemic
       ),
   
-      wingPath: ($) => prec.left(1, 
-        seq(
-          choice(
-            $.lark,
-            $.fullContext,
-            $.name,
-            $.parent,
-            $.specialIndex,
-            $.stripFace
-          ),
-          repeat1(
-            seq(
-              ".",
-              choice(
-                $.lark,
-                $.fullContext,
-                $.name,
-                $.parent,
-                $.specialIndex,
-                $.stripFace
+      wingPath: ($) =>
+        prec.left(
+          0,
+          seq(
+            choice(
+              $.lark,
+              $.fullContext,
+              $.name,
+              $.parent,
+              $.specialIndex,
+              $.stripFace
+            ),
+            repeat1(
+              seq(
+                ".",
+                choice(
+                  $.lark,
+                  $.fullContext,
+                  $.name,
+                  $.parent,
+                  $.specialIndex,
+                  $.stripFace
+                )
               )
             )
           )
-        )
-      ),
+        ),
   
           
     
