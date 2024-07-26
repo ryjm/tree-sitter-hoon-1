@@ -17,8 +17,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_hoonTall"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_sailExpression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_hoonExpression"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -13130,30 +13139,6 @@
   ],
   "conflicts": [
     [
-      "_hoonExpression",
-      "_sailExpression"
-    ],
-    [
-      "lark",
-      "number"
-    ],
-    [
-      "fullContext",
-      "number",
-      "phonemic"
-    ],
-    [
-      "fullContext",
-      "number"
-    ],
-    [
-      "_value",
-      "addCell"
-    ],
-    [
-      "tapeOrCord"
-    ],
-    [
       "mold",
       "parent"
     ],
@@ -13266,41 +13251,6 @@
     [
       "_termWide",
       "wingPath"
-    ],
-    [
-      "source_file",
-      "_Gap"
-    ],
-    [
-      "source_file"
-    ],
-    [
-      "wingPath"
-    ],
-    [
-      "faslusTall"
-    ],
-    [
-      "faslusImport"
-    ],
-    [
-      "fashepTall"
-    ],
-    [
-      "_specWide",
-      "_specTall"
-    ],
-    [
-      "_specTall",
-      "_specWide"
-    ],
-    [
-      "_specWide",
-      "_wingWide"
-    ],
-    [
-      "_wingWide",
-      "addCell"
     ]
   ],
   "precedences": [],
