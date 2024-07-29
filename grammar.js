@@ -4,11 +4,10 @@ module.exports = grammar({
     rules: {
       source_file: ($) =>
         seq(
-          optional($._Gap),
           $._hoonTall,
-          repeat(seq($._Gap, $._hoonTall)),
-          // choice($._sailExpression, $._hoonTall),
-          // repeat(seq($._Gap, choice($._hoonTall, $._sailExpression))),
+          repeat1(seq($._Gap, $._hoonTall)),
+          // choice($.sailExpression, $._hoonTall),
+          // repeat(seq($._Gap, choice($._hoonTall, $.sailExpression))),
           optional($._Gap)
         ),
 
@@ -16,82 +15,15 @@ module.exports = grammar({
       //   $._hoonTall,
       //   $._hoonWide
       // ),
+      // _hoonOrSail: ($) => choice($.sailExpression, $._hoonTall),
+      _hoonTall: ($) => choice(field('runeTall', $._runeTall), field("wide", $._hoonWide), field("sail", $.sailExpression)),
 
-      _hoonTall: ($) => choice($._sailExpression, $._runeTall, $._hoonWide),
+      _hoonWide: $ => choice(
+        field('runeWide', $._runeWide),           // First choice: _runeWide
+        field('value', $._value),                 // Second choice: _value
+        field('irregularForms', $._irregularForms), // Third choice: _irregularForms
+      ),
 
-      _hoonWide: ($) => choice($._runeWide, $._value, $._irregularForms),
-
-
-    _sailExpression: ($) => choice($.sailTagTall, $.sailTagWide),
-    // _sailExpression: ($) => choice(
-    //   $.sailTag,
-    //   $.sailTagAttributes
-      // $.sailMiclus,
-     // $.sailMictar,
-
-      // $.sailMictis,
-      // $.sailMicfas
-
-    _sailRunes: ($) => choice(
-      $.mictisTall,
-      $.mictisWide,
-      $.miclusTall,
-      $.miclusWide,
-      $.mictarTall,
-      $.mictarWide,
-      $.mictisTall,
-      $.mictisWide
-    ),
-      sailTagTall: ($) => seq(
-        ";",
-        field("tagName", $.name),
-        repeat($.sailTagAttributesWide),
-        $._Gap,
-        choice(
-          ";",
-          repeat($.sailTagAttributesTall),
-          choice($._sailRunes, $._sailExpression)
-          ),
-          $.seriesTerminator),
-
-      sailTagAttributesTall: ($) => seq($.sailAttributeTall, $._Gap),
-    sailTagWide: ($) => seq(
-      ";",
-      field("tagName", $.name),
-      repeat($.sailTagAttributesWide),
-      choice(
-        seq(":", $._space, $._sailContent), // Inline content
-        ";"
-    )),
-
-
-
-    sailTagAttributesWide: ($) => choice(
-      $.sailId,
-      $.sailClass,
-      $.sailAttributeWide,
-      $.sailHref,
-      $.sailSrc
-    ),
-
-    sailId: ($) => seq("#", $.name),
-
-    sailClass: ($) => seq(".", $.name),
-
-    // sailAttribute: ($) => choice($.sailAttributeWide, $.sailAttributeTall),
-    sailAttributeWide: ($) => seq("(", commaSep($.sailAttributePair), ")"),
-    sailAttributeTall: ($) => seq("=", $.name, $._Gap, $.string),
-    sailAttributePair: ($) => seq($.name, $._space, $.string),
-
-    sailHref: ($) => seq("/", $.name),
-
-    sailSrc: ($) => seq("@", $.name),
-
-
-    _sailContent: ($) => repeat1(choice(
-      $.string,
-      /[^\n{};]+/
-    )),
 
       // Sail-specific runes
       // sailMiclus: ($) => seq(";+", $._Gap, $._hoonTall),
@@ -99,7 +31,7 @@ module.exports = grammar({
       // sailMictis: ($) => seq(
       //   ";=",
       //   $._Gap,
-      //   repeat1(seq($._sailExpression, $._Gap)),
+      //   repeat1(seq($.sailExpression, $._Gap)),
       //   $.seriesTerminator,
       // ),
       // sailMicfas: ($) => seq(";/", $._space, $.string),
@@ -151,15 +83,20 @@ module.exports = grammar({
             )
           ),
 
+
+
+
       _specTall: ($) =>
+  field('spec',
       choice(
         $._bucTall,
         $._specWide,
         $.cenhepTall,
         $.cenlusTall,
         seq("$;", $._Gap, $._specTall)
-      ), //TODO: add all cen runes
+      )), //TODO: add all cen runes
     _specWide: ($) =>
+  field('specWide',
       choice(
         $.term,
         $.aura,
@@ -178,64 +115,93 @@ module.exports = grammar({
           $.wrapFace
         ), // $.wrapFace,
         $.mold,
-        seq("[", $._specWide, repeat(seq($._space, $._specWide)), "]"), //$.cell
+        $.cell,
         $.normalize,
-        $._bucWide,
+        $._bucWke]oide,
         seq("$;", "(", $._specWide, ")"),
         $.gateCall,
         $.cenhepWide,
         $.cenlusWide,
         // $.wrapFace2,
         $.factoryGate
-      ),
-    _wingTall: ($) => choice($._wingWide, $.tisgalTall, $.tisgarTall),
-    _wingWide: ($) =>
-      choice(
-        $.name,
-        $.parent,
-        $.gateCall,
-        $.lark,
-        $.wingPath,
-        $.fullContext,
-        $.specialIndex,
-        $.wrapFace,
-        $.tisgalWide,
-        $.tisgarWide,
-        $.cell
-      ),
-    // _skinTall: $ => choice($._skinWide),
-    // _skinWide: $ => choice(
-    //     $.name,
-    //     $.mold,
-    //     $.cell,
-    //     $.gateCall,
-    //     $.term,
-    //     $.parent,
-    //     $.normalize,
-    //     $.aura,
-    //     prec.left(0, seq($._skinWide, "=", choice($._skinWide, seq($.name, ":", $.name)))),
-    //     seq("=", choice($._skinWide, seq($.name, ":", $.name))),
-    // ),
-    _skinTall: ($) => choice($._specTall, $.addCell),
-    _skinWide: ($) => choice($._specWide, $.addCell),
-    _termTall: ($) => choice($._termWide),
-    _termWide: ($) => choice($.name, $.term),
-    _tomeTall: ($) => choice($._tomeWide),
-    _tomeWide: ($) => choice($.name),
-    _studTall: ($) => choice($._studWide),
-    _studWide: ($) => choice($.name),
-    _chumTall: ($) => choice($._chumWide),
-    _chumWide: ($) =>
-      choice(seq($.term, repeat(seq(".", choice($.number, $.name))))),
-    // _valueTall: $ => choice($._valueWide),
-    // _valueWide: $ => choice(
-    //     $.name,
-    //     $.number
-    // ),
-    _valueTall: ($) => $._hoonTall,
-    _valueWide: ($) => $._hoonWide,
-    _labelTall: ($) => choice($._labelWide),
-    _labelWide: ($) => choice($.name, $.term),
+)),
+_wingTall: ($) => choice(
+  field('wingWide', $._wingWide),
+  field('tisgalTall', $.tisgalTall),
+  field('tisgarTall', $.tisgarTall)
+),
+
+_wingWide: ($) =>
+  choice(
+    field('name', $.name),
+    field('parent', $.parent),
+    field('gateCall', $.gateCall),
+    field('lark', $.lark),
+    field('wingPath', $.wingPath),
+    field('fullContext', $.fullContext),
+    field('specialIndex', $.specialIndex),
+    field('wrapFace', $.wrapFace),
+    field('tisgalWide', $.tisgalWide),
+    field('tisgarWide', $.tisgarWide),
+    field('cell', $.cell)
+  ),
+
+_skinTall: ($) => choice(
+  field('specTall', $._specTall),
+  field('addCell', $.addCell)
+),
+
+_skinWide: ($) => choice(
+  field('specWide', $._specWide),
+  field('addCell', $.addCell)
+),
+
+_termTall: ($) => choice(
+  field('termWide', $._termWide)
+),
+
+_termWide: ($) => choice(
+  field('name', $.name),
+  field('term', $.term)
+),
+
+_tomeTall: ($) => choice(
+  field('tomeWide', $._tomeWide)
+),
+
+_tomeWide: ($) => choice(
+  field('name', $.name)
+),
+
+_studTall: ($) => choice(
+  field('studWide', $._studWide)
+),
+
+_studWide: ($) => choice(
+  field('name', $.name)
+),
+
+_chumTall: ($) => choice(
+  field('chumWide', $._chumWide)
+),
+
+_chumWide: ($) =>
+  choice(
+    seq($.term, repeat(seq(".", choice($.number, $.name))))
+  ),
+
+_valueTall: ($) => field('hoonTall', $._hoonTall),
+
+_valueWide: ($) => field('hoonWide', $._hoonWide),
+
+_labelTall: ($) => choice(
+  field('labelWide', $._labelWide)
+),
+
+_labelWide: ($) => choice(
+  field('name', $.name),
+  field('term', $.term)
+),
 
     _runeTall: ($) =>
       choice(
@@ -261,19 +227,20 @@ module.exports = grammar({
         $.censigTall,
         $.centarTall,
         $.centisTall,
-        $.colhepTall,
+        prec(3, $.colhepTall),
         $.colcabTall,
         $.collusTall,
         $.colketTall,
         $.coltarTall,
         $.colsigTall,
         $.dotketTall,
-        $.dotlusTall,
+        // $.dotlusTall,
         $.dottarTall,
         $.dottisTall,
         $.dotwutTall,
         $.fashepTall,
         $.faslusTall,
+        $.faspatTall,
         $.fastisTall,
         $.fastarTall,
         $.fasbucTall,
@@ -483,7 +450,6 @@ module.exports = grammar({
         $.buctisWide,
         $.bucwutWide
       ),
-    rune: ($) => "感#)@!(",
 
     lusbarTall: ($) => seq(alias("+|", $.rune), $._Gap, $._labelTall),
     lusbucTall: ($) =>
@@ -761,6 +727,7 @@ module.exports = grammar({
         )
       ),
     fastisTall: ($) => seq(alias("/=", $.rune), $._Gap, $.name, $._Gap, $.path),
+    faspatTall: ($) => seq(alias("/@", $.rune), $._Gap, $.name),
     fastarTall: ($) =>
       seq(alias("/*", $.rune), $._Gap, $.name, $._Gap, $.term, $._Gap, $.path),
     fasbucTall: ($) =>
@@ -1696,7 +1663,71 @@ module.exports = grammar({
     zapcolWide: ($) => seq(alias("!:", $.rune), "(", $._hoonWide, ")"),
     zapdotWide: ($) => seq(alias("!.", $.rune), "(", $._hoonWide, ")"),
     zapzap: ($) => alias("!!", $.rune),
+    rune: ($) => "感#)@!(",
+      sailExpression: ($) => choice($.sailTagTall, $.sailTagWide),
 
+      _sailRunes: ($) => choice(
+        $.mictisTall,
+        $.mictisWide,
+        $.miclusTall,
+        $.miclusWide,
+        $.mictarTall,
+        $.mictarWide,
+        $.mictisTall,
+        $.mictisWide
+      ),
+
+
+      sailTagContent: ($) => prec.left(repeat1(seq(
+        field("content", choice(
+          seq(optional($._Gap), ";", choice($._space, $._Gap), optional($.name)),
+          seq(optional($._Gap), $._sailRunes),
+          seq(optional($._Gap), $.sailExpression),
+        ))
+      ))),
+
+      sailTagTall: ($) => seq(
+        seq(";", field("tagName", $.name),
+          optional(field("wideAttributes", repeat($.sailTagAttributesWide))),
+          $._Gap
+        ),
+        optional(field("tallAttributes", repeat($.sailTagAttributesTall))),
+        repeat(field("tagContent", $.sailTagContent)),
+        seq(optional($._Gap), $.seriesTerminator),
+      ),
+
+      sailTagWide: ($) => prec.left(seq(
+        seq(";", field("tagName", $.name)),
+        optional(field("attributes", repeat($.sailTagAttributesWide))),
+        choice(
+          seq(":", $._space, field("content", $.sailContent)), // Inline content
+          ";"
+
+        ))
+      ),
+      sailTagAttributesTall: ($) => seq($._Gap, field("attribute", $.sailAttributeTall)),
+
+      sailTagAttributesWide: ($) => choice(
+        field("id", $.sailId),
+        field("class", $.sailClass),
+        field("attribute", $.sailAttributeWide),
+        field("href", $.sailHref),
+        field("src", $.sailSrc)
+      ),
+
+      sailAttributeWide: ($) => seq("(", field("pairs", commaSep($.sailAttributePair)), ")"),
+      sailAttributeTall: ($) => seq("=", field("name", $.name), $._Gap, field("value", $.string)),
+      sailAttributePair: ($) => seq(field("name", $.name), $._space, field("value", $.string)),
+
+      sailId: ($) => prec(1, seq("#", field("value", $.name))),
+      sailClass: ($) => prec(1, seq(".", field("value", $.name))),
+      sailHref: ($) => prec(1, seq("/", field("value", $.name))),
+      sailSrc: ($) => prec(1, seq("@", field("value", $.name))),
+
+      sailContent: ($) =>  prec(1, choice(
+        field("string", $.string),
+        field("value", $._value)
+      )),
     _irregularForms: ($) =>
       choice(
         $.normalize,
@@ -1883,7 +1914,7 @@ module.exports = grammar({
       ),
     aura: ($) => /@[a-zA-Z]*/,
     _space: ($) => " ",
-    _Gap: ($) => repeat1(/ *\n+ *|  +/),
+    _Gap: ($) => prec.left(repeat1(/ *\n+ *|  +/)),
     fullContext: ($) => ".",
     stripFace: ($) => ",",
     lark: ($) => choice("+", "-", /(([-+][<>])+)|([-+]([<>][-+])+)/),
@@ -1963,7 +1994,7 @@ module.exports = grammar({
   },
   extras: ($) => [$.lineComment],
   conflicts: ($) => [
- //    [$._hoonExpression, $._sailExpression],
+ //    [$._hoonExpression, $.sailExpression],
  //    [$.lark, $.number],
  //    [$.fullContext, $.number, $.phonemic],
  //    [$.fullContext, $.number],
@@ -1998,7 +2029,10 @@ module.exports = grammar({
     [$._termWide, $.wingPath],
     [$.cencolTall],
     [$.coltarTall],
-    [$.sailHref]
+    [$.sailId, $.path],
+    [$.sailAttributePair, $._value],
+    [$.sailTagContent]
+    // [$.sailHref]
     // [$.sailText],
     // [$.sailText, $.string],
   ],
