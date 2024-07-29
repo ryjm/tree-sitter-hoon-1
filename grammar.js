@@ -11,21 +11,28 @@ module.exports = grammar({
           // repeat(seq($._Gap, choice($._hoonTall, $._sailExpression))),
           optional($._Gap)
         ),
-  
+
       // _hoonExpression: ($) => choice(
       //   $._hoonTall,
       //   $._hoonWide
       // ),
-  
-      _hoonTall: ($) => choice($._runeTall, $._hoonWide, $._sailExpression),
-  
-      _hoonWide: ($) => choice($._runeWide, $._value, $._irregularForms),
-  
 
-    _sailExpression: ($) => choice(
-      $.sailTag,
-      $.sailText,
-      $.sailInterpolation,
+      _hoonTall: ($) => choice($._sailExpression, $._runeTall, $._hoonWide),
+
+      _hoonWide: ($) => choice($._runeWide, $._value, $._irregularForms),
+
+
+    _sailExpression: ($) => choice($.sailTagTall, $.sailTagWide),
+    // _sailExpression: ($) => choice(
+    //   $.sailTag,
+    //   $.sailTagAttributes
+      // $.sailMiclus,
+     // $.sailMictar,
+
+      // $.sailMictis,
+      // $.sailMicfas
+
+    _sailRunes: ($) => choice(
       $.mictisTall,
       $.mictisWide,
       $.miclusTall,
@@ -33,65 +40,59 @@ module.exports = grammar({
       $.mictarTall,
       $.mictarWide,
       $.mictisTall,
-      $.mictisWide,
-      // $.sailMiclus,
-     // $.sailMictar,
-      
-      // $.sailMictis,
-      // $.sailMicfas
+      $.mictisWide
     ),
+      sailTagTall: ($) => seq(
+        ";",
+        field("tagName", $.name),
+        repeat($.sailTagAttributesWide),
+        $._Gap,
+        choice(
+          ";",
+          repeat($.sailTagAttributesTall),
+          choice($._sailRunes, $._sailExpression)
+          ),
+          $.seriesTerminator),
 
-    sailTag: ($) => prec.right(1, seq(
+      sailTagAttributesTall: ($) => seq($.sailAttributeTall, $._Gap),
+    sailTagWide: ($) => seq(
       ";",
-      field("tagName", choice($.name, $.term)),
-      optional($.sailTagAttributes),
+      field("tagName", $.name),
+      repeat($.sailTagAttributesWide),
       choice(
-        ";", // Empty tag
-        seq(":", $._sailContent), // Inline content
-        seq( // Nested content
-          $._Gap,
-          repeat($._sailExpression),
-          $._Gap,
-          "=="
-        )
-      )
+        seq(":", $._space, $._sailContent), // Inline content
+        ";"
     )),
 
-    sailTagAttributes: ($) => prec.left(1, repeat1(choice(
+
+
+    sailTagAttributesWide: ($) => choice(
       $.sailId,
       $.sailClass,
-      $.sailAttribute,
+      $.sailAttributeWide,
       $.sailHref,
       $.sailSrc
-    ))),
+    ),
 
     sailId: ($) => seq("#", $.name),
 
-    sailClass: ($) => prec.right(2, seq(".", $.name)),
+    sailClass: ($) => seq(".", $.name),
 
-    sailAttribute: ($) => choice(
-      seq("(", commaSep($.sailAttributePair), ")"),
-      seq($._Gap, repeat1($.sailAttributePairTall))
-    ),
-
+    // sailAttribute: ($) => choice($.sailAttributeWide, $.sailAttributeTall),
+    sailAttributeWide: ($) => seq("(", commaSep($.sailAttributePair), ")"),
+    sailAttributeTall: ($) => seq("=", $.name, $._Gap, $.string),
     sailAttributePair: ($) => seq($.name, $._space, $.string),
 
-    sailAttributePairTall: ($) => seq("=", $.name, $._space, $.string),
+    sailHref: ($) => seq("/", $.name),
 
-    sailHref: ($) => seq("/", $.string),
+    sailSrc: ($) => seq("@", $.name),
 
-    sailSrc: ($) => seq("@", $.string),
-
-    sailText: ($) => seq(";", $._space, /[^\n]+/),
-
-    sailInterpolation: ($) => seq("{", $._hoonWide, "}"),
 
     _sailContent: ($) => repeat1(choice(
-      $.sailText,
-      $.sailInterpolation,
+      $.string,
       /[^\n{};]+/
     )),
-  
+
       // Sail-specific runes
       // sailMiclus: ($) => seq(";+", $._Gap, $._hoonTall),
       // sailMictar: ($) => seq(";*", $._Gap, $._hoonTall),
@@ -102,7 +103,7 @@ module.exports = grammar({
       //   $.seriesTerminator,
       // ),
       // sailMicfas: ($) => seq(";/", $._space, $.string),
-  
+
       // Modify existing rules to avoid conflicts
       _value: ($) => choice(
         $.term,
@@ -124,10 +125,8 @@ module.exports = grammar({
         $.bitcoinAddress,
         $.phonemic
       ),
-  
+
       wingPath: ($) =>
-        prec.left(
-          0,
           seq(
             choice(
               $.lark,
@@ -150,12 +149,8 @@ module.exports = grammar({
                 )
               )
             )
-          )
-        ),
-  
-          
-    
-    
+          ),
+
       _specTall: ($) =>
       choice(
         $._bucTall,
@@ -818,7 +813,7 @@ module.exports = grammar({
         $._Gap,
         $._hoonTall
       ),
-    miclusTall: ($) => prec(2, seq(alias(";+", $.rune), $._Gap, $._hoonTall)),
+    miclusTall: ($) => seq(alias(";+", $.rune), $._Gap, $._hoonTall),
     micmicTall: ($) =>
       seq(alias(";;", $.rune), $._Gap, $._specTall, $._Gap, $._hoonTall),
     micfasTall: ($) => seq(alias(";/", $.rune), $._Gap, $._hoonTall),
@@ -831,7 +826,7 @@ module.exports = grammar({
         repeat1(seq($._hoonTall, $._Gap)),
         $.seriesTerminator
       ),
-    mictarTall: ($) => prec(2, seq(alias(";*", $.rune), $._Gap, $._hoonTall)),
+    mictarTall: ($) => seq(alias(";*", $.rune), $._Gap, $._hoonTall),
     mictisTall: ($) =>
       seq(
         alias(";=", $.rune),
@@ -1702,154 +1697,6 @@ module.exports = grammar({
     zapdotWide: ($) => seq(alias("!.", $.rune), "(", $._hoonWide, ")"),
     zapzap: ($) => alias("!!", $.rune),
 
-    structure: ($) =>
-    prec(0, 
-      choice(
-        $.bucbarTall,
-        $.buccabTall,
-        $.buccenTall,
-        $.buccolTall,
-        $.bucgalTall,
-        $.bucgarTall,
-        $.buchepTall,
-        $.bucketTall,
-        $.buclusTall,
-        $.bucpamTall,
-        $.bucsigTall,
-        $.bucpatTall,
-        $.buctisTall,
-        $.bucwutTall
-      )),
-    call: ($) =>
-      choice(
-        $.cencabTall,
-        $.cencolTall,
-        $.cendotTall,
-        $.cenhepTall,
-        $.cenketTall,
-        $.cenlusTall,
-        $.censigTall,
-        $.centarTall,
-        $.centisTall
-      ),
-    cellMaker: ($) =>
-      choice(
-        $.colhepTall,
-        $.colcabTall,
-        $.collusTall,
-        $.colketTall,
-        $.coltarTall,
-        $.colsigTall
-      ),
-    nock: ($) =>
-      choice(
-        $.dotketTall,
-        $.dotlusTall,
-        $.dottarTall,
-        $.dottisTall,
-        $.dotwutTall
-      ),
-
-    import: ($) =>
-      choice(
-        $.faslusTall,
-        $.fashepTall,
-        $.fastisTall,
-        $.fastarTall,
-        $.fasbucTall,
-        $.fassigTall,
-        $.fascenTall,
-        $.faswutTall
-      ),
-
-    casts: ($) =>
-      choice(
-        $.ketbarTall,
-        $.ketcolTall,
-        $.ketdotTall,
-        $.kethepTall,
-        $.ketlusTall,
-        $.ketpamTall,
-        $.ketsigTall,
-        $.kettarTall,
-        $.kettisTall,
-        $.ketwutTall
-      ),
-    macros: ($) =>
-      choice(
-        $.miccolTall,
-        $.micgalTall,
-        $.miclusTall,
-        $.micmicTall,
-        $.micfasTall,
-        $.micsigTall,
-        $.mictarTall,
-        $.mictisTall
-      ),
-
-    hints: ($) =>
-      choice(
-        $.siggarTall,
-        $.sigbarTall,
-        $.sigbucTall,
-        $.sigcabTall,
-        $.sigcenTall,
-        $.siggalTall,
-        $.siglusTall,
-        $.sigfasTall,
-        $.sigpamTall,
-        $.sigtisTall,
-        $.sigwutTall,
-        $.sigzapTall
-      ),
-
-    subject: ($) =>
-      choice(
-        $.tisgarTall,
-        $.tisbarTall,
-        $.tiscolTall,
-        $.tiscomTall,
-        $.tisdotTall,
-        $.tishepTall,
-        $.tisketTall,
-        $.tisgalTall,
-        $.tislusTall,
-        $.tismicTall,
-        $.tisfasTall,
-        $.tissigTall,
-        $.tistarTall,
-        $.tiswutTall
-      ),
-
-    conditionals: ($) =>
-      choice(
-        $.wutbarTall,
-        $.wuthepTall,
-        $.wutcolTall,
-        $.wutdotTall,
-        $.wutketTall,
-        $.wutgalTall,
-        $.wutgarTall,
-        $.wutlusTall,
-        $.wutpamTall,
-        $.wutpatTall,
-        $.wutsigTall,
-        $.wuttisTall,
-        $.wutzapTall
-      ),
-    wild: ($) =>
-      choice(
-        $.zapcomTall,
-        $.zapgarTall,
-        $.zapgalTall,
-        $.zapmicTall,
-        $.zaptisTall,
-        $.zapwutTall,
-        $.zappatTall,
-        $.zapcolTall,
-        $.zapdotTall
-      ),
-
     _irregularForms: ($) =>
       choice(
         $.normalize,
@@ -2051,11 +1898,12 @@ module.exports = grammar({
         optional(/\.(\.[0-9a-f]{4})+/)
       ),
     specialIndex: ($) => seq(choice("+", "|", "&"), /[0-9]+/),
-    
+
     path: ($) =>
       seq(
         optional("%"),
         choice(
+          "#",
           "/",
           repeat1(
             seq(
@@ -2077,18 +1925,39 @@ module.exports = grammar({
     coreTerminator: ($) => "--",
 
 
-    _tapeOrCord: ($) =>
-      seq(
-        $._stringStart,
-        repeat(choice($.interpolation, $.stringContent)),
-        $._stringEnd
-      ),
+    _tapeOrCord: ($) => seq(
+      $._stringStart,
+      repeat(choice(
+        $.stringContent,
+        $.interpolation,
+        $.tripleQuotedString
+      )),
+      $._stringEnd
+    ),
 
+    tripleQuotedString: ($) => seq(
+      '"""',
+      repeat(choice(
+        /[^"{]+/,
+        /"[^"]/,
+        /""/,
+        $.interpolation
+      )),
+      '"""'
+    ),
+
+    // _tapeOrCord: ($) =>
+    //   seq(
+    //     $._stringStart,
+    //     repeat(choice($.interpolation, $.stringContent)),
+    //     $._stringEnd
+    //   ),
+    //
     tapeOrCord: ($) =>
-      prec.left(1, seq(
+      seq(
         $._tapeOrCord,
         optional(repeat(seq(".", $._tapeOrCord)))
-      )),
+      ),
 
     interpolation: ($) => seq("{", $._hoonWide, "}"),
   },
@@ -2127,11 +1996,15 @@ module.exports = grammar({
     [$.censigWide, $.term],
     [$.typeUnion, $.mold],
     [$._termWide, $.wingPath],
-    [$._runeTall, $._sailExpression],
-    [$._runeWide, $._sailExpression],
+    [$.cencolTall],
+    [$.coltarTall],
+    [$.sailHref]
+    // [$.sailText],
+    // [$.sailText, $.string],
   ],
   externals: ($) => [$.indent, $._stringStart, $.stringContent, $._stringEnd],
 });
 function commaSep(rule) {
   return optional(seq(rule, repeat(seq(",", rule))));
 }
+
