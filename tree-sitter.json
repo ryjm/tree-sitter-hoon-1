@@ -1,0 +1,25 @@
+{
+  "grammars": [
+    {
+      "name": "hoon",
+      "scope": "source.hoon",
+      "path": ".",
+      "file-types": [
+        "hoon"
+      ],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "tags": "queries/tags.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.2",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for Hoon",
+    "authors": [
+      {
+        "name": "urbit-pilled"
+      }
+    ]
+  }
+}
