@@ -111,18 +111,22 @@ module.exports = grammar({
           )
         ), // $.composeExpressions,
         alias(
-          prec.left(0, seq(optional($._specWide), "=", $._specWide)),
+          prec.left(2, seq(optional($._specWide), "=", $._specWide)),
           $.wrapFace
         ), // $.wrapFace,
+        // Handle shorthand =name syntax
+        alias(
+          prec.left(2, seq("=", $.name)),
+          $.shorthandFace
+        ),
         $.mold,
         $.cell,
         $.normalize,
-        $._bucWke]oide,
+        $._bucWide,
         seq("$;", "(", $._specWide, ")"),
         $.gateCall,
         $.cenhepWide,
         $.cenlusWide,
-        // $.wrapFace2,
         $.factoryGate
 )),
 _wingTall: ($) => choice(
@@ -1732,7 +1736,6 @@ _labelWide: ($) => choice(
       choice(
         $.normalize,
         $.wrapFace,
-        $.wrapFace2,
         $.typeUnion,
         $.gateCall,
         $.pullArmInDoor,
@@ -1757,8 +1760,7 @@ _labelWide: ($) => choice(
       ),
 
     normalize: ($) => prec.left(2, seq("_", $._hoonWide)),
-    wrapFace: ($) => seq($._skinWide, "=", $._hoonWide),
-    wrapFace2: ($) => seq("=", $._specWide),
+    wrapFace: ($) => prec.left(2, seq($._skinWide, "=", $._hoonWide)),
     typeUnion: ($) =>
       seq("?", "(", $._specWide, repeat(seq($._space, $._specWide)), ")"),
     gateCall: ($) =>
@@ -1786,8 +1788,12 @@ _labelWide: ($) => choice(
       prec.right(2, seq(
         optional("~"),
         "[",
-        $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        optional($._space),
+        choice(
+          seq($._hoonWide, repeat(seq($._space, $._hoonWide))),
+          seq() // empty cell
+        ),
+        optional($._space),
         "]",
         optional("~")
       )),
@@ -2019,8 +2025,8 @@ _labelWide: ($) => choice(
     [$.wutcolWide, $.mold],
     [$._skinWide, $._value],
     [$.increment, $.lark],
-    [$.wrapFace2, $._specWide],
     [$._specWide, $.factoryGate],
+    [$.shorthandFace, $._specWide],
     [$._runeWide, $._wingWide],
     [$.path],
     [$.censigTall, $.term],
