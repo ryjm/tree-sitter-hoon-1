@@ -5,9 +5,7 @@ module.exports = grammar({
       source_file: ($) =>
         seq(
           $._hoonTall,
-          repeat1(seq($._Gap, $._hoonTall)),
-          // choice($.sailExpression, $._hoonTall),
-          // repeat(seq($._Gap, choice($._hoonTall, $.sailExpression))),
+          repeat(seq($._Gap, $._hoonTall)),
           optional($._Gap)
         ),
 
@@ -98,6 +96,9 @@ module.exports = grammar({
     _specWide: ($) =>
   field('specWide',
       choice(
+        // Explicit face wrapping patterns
+        $.faceSpec,
+        $.shorthandFaceSpec,
         $.term,
         $.aura,
         $.typeUnion,
@@ -110,15 +111,6 @@ module.exports = grammar({
             )
           )
         ), // $.composeExpressions,
-        alias(
-          prec.left(2, seq(optional($._specWide), "=", $._specWide)),
-          $.wrapFace
-        ), // $.wrapFace,
-        // Handle shorthand =name syntax
-        alias(
-          prec.left(2, seq("=", $.name)),
-          $.shorthandFace
-        ),
         $.mold,
         $.cell,
         $.normalize,
@@ -144,7 +136,6 @@ _wingWide: ($) =>
     field('wingPath', $.wingPath),
     field('fullContext', $.fullContext),
     field('specialIndex', $.specialIndex),
-    field('wrapFace', $.wrapFace),
     field('tisgalWide', $.tisgalWide),
     field('tisgarWide', $.tisgarWide),
     field('cell', $.cell)
@@ -238,7 +229,7 @@ _labelWide: ($) => choice(
         $.coltarTall,
         $.colsigTall,
         $.dotketTall,
-        // $.dotlusTall,
+        $.dotlusTall,
         $.dottarTall,
         $.dottisTall,
         $.dotwutTall,
@@ -1735,7 +1726,6 @@ _labelWide: ($) => choice(
     _irregularForms: ($) =>
       choice(
         $.normalize,
-        $.wrapFace,
         $.typeUnion,
         $.gateCall,
         $.pullArmInDoor,
@@ -1760,7 +1750,6 @@ _labelWide: ($) => choice(
       ),
 
     normalize: ($) => prec.left(2, seq("_", $._hoonWide)),
-    wrapFace: ($) => prec.left(2, seq($._skinWide, "=", $._hoonWide)),
     typeUnion: ($) =>
       seq("?", "(", $._specWide, repeat(seq($._space, $._specWide)), ")"),
     gateCall: ($) =>
@@ -1790,7 +1779,11 @@ _labelWide: ($) => choice(
         "[",
         optional($._space),
         choice(
-          seq($._hoonWide, repeat(seq($._space, $._hoonWide))),
+          // For cells in spec contexts, allow spec-wide elements including wrapFace
+          seq(
+            choice($._hoonWide, $._specWide),
+            repeat(seq($._space, choice($._hoonWide, $._specWide)))
+          ),
           seq() // empty cell
         ),
         optional($._space),
@@ -1898,7 +1891,6 @@ _labelWide: ($) => choice(
       ), //@q
     unicode: ($) => seq("~-~", /(\w|\.)+/),
     boolean: ($) => choice("&", "|", ".y", ".n"),
-    mold: ($) => choice("?", "^", "~", "*"),
     term: ($) =>
       choice(
         seq(
@@ -1997,6 +1989,18 @@ _labelWide: ($) => choice(
       ),
 
     interpolation: ($) => seq("{", $._hoonWide, "}"),
+
+    // Face wrapping rules
+    faceSpec: ($) => prec.left(10, seq(
+      field('face', choice($.name, $.aura, $.term, $.mold)),
+      '=',
+      field('spec', choice($.name, $.aura, $.term, $.mold, $.cell, $.gateCall))
+    )),
+    
+    shorthandFaceSpec: ($) => prec.left(10, seq(
+      '=',
+      field('name', $.name)
+    )),
   },
   extras: ($) => [$.lineComment],
   conflicts: ($) => [
@@ -2006,6 +2010,8 @@ _labelWide: ($) => choice(
  //    [$.fullContext, $.number],
  // [$._value, $.addCell],
     [$.mold, $.parent],
+    [$.mold, $.bunt],
+    [$.zapwutTall, $.mold],
     [$.buclusTall, $.buclusWide, $.name],
     [$._specWide, $._value],
     [$._irregularForms, $._specWide],
@@ -2027,6 +2033,10 @@ _labelWide: ($) => choice(
     [$.increment, $.lark],
     [$._specWide, $.factoryGate],
     [$._runeWide, $._wingWide],
+    // Add conflicts for face spec parsing
+    [$.faceSpec, $.name],
+    [$.faceSpec, $.aura],
+    [$._specWide],
     [$.path],
     [$.censigTall, $.term],
     [$.censigWide, $.term],

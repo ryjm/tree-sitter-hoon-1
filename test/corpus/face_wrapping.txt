@@ -1,0 +1,128 @@
+==================
+face_spec_basic
+==================
+|%
++$  test  a=@
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (faceSpec
+        (name)
+        (aura)))
+    (Gap)
+    (coreTerminator)))
+
+==================
+shorthand_face_spec
+==================
+|%
++$  test  =name
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (shorthandFaceSpec
+        (name)))
+    (Gap)
+    (coreTerminator)))
+
+==================
+cell_with_faces
+==================
+|%
++$  goof  [mote=term =tang]
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (cell
+        (faceSpec
+          (name)
+          (name))
+        (shorthandFaceSpec
+          (name))))
+    (Gap)
+    (coreTerminator)))
+
+==================
+complex_cell_faces
+==================
+|%
++$  input  [eny=@ our=@ux now=@da cause=*]
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (cell
+        (faceSpec
+          (name)
+          (aura))
+        (faceSpec
+          (name)
+          (aura))
+        (faceSpec
+          (name)
+          (aura))
+        (faceSpec
+          (name)
+          (mold))))
+    (Gap)
+    (coreTerminator)))
+
+==================
+mixed_shorthand_faces
+==================
+|%
++$  ovum  [=wire =input]
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (cell
+        (shorthandFaceSpec
+          (name))
+        (shorthandFaceSpec
+          (name))))
+    (Gap)
+    (coreTerminator)))

@@ -9,8 +9,7 @@
 (string) @string
 (boolean) @constant.builtin
 (date) @string.special
-(cord) @string
-(tape) @string
+(tapeOrCord) @string
 (knot) @string.special.symbol
 (term) @constant
 (aura) @type.builtin
@@ -30,8 +29,6 @@
 
 ;; Names and Identifiers
 (name) @variable
-(armName) @function
-(label) @label
 
 ;; Runes (categorized by function)
 ;; All runes
@@ -209,7 +206,6 @@
 
 ;; Irregular forms get special highlighting
 (increment) @operator
-(decrement) @operator
 (typeUnion) @type
 (normalize) @type
 

@@ -296,13 +296,13 @@ empty_constructs
 ---
 
 (source_file
-  (null)
+  (mold)
   (Gap)
   (cell)
   (Gap)
-  (tape)
+  (string (tapeOrCord))
   (Gap)
-  (cord))
+  (string (tapeOrCord)))
 
 ==================
 special_paths_and_indices

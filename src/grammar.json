@@ -9,7 +9,7 @@
           "name": "_hoonTall"
         },
         {
-          "type": "REPEAT1",
+          "type": "REPEAT",
           "content": {
             "type": "SEQ",
             "members": [
@@ -298,6 +298,14 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "faceSpec"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "shorthandFaceSpec"
+          },
+          {
+            "type": "SYMBOL",
             "name": "term"
           },
           {
@@ -366,62 +374,6 @@
                 }
               ]
             }
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "PREC_LEFT",
-              "value": 2,
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_specWide"
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "="
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "_specWide"
-                  }
-                ]
-              }
-            },
-            "named": true,
-            "value": "wrapFace"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "PREC_LEFT",
-              "value": 2,
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "="
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "name"
-                  }
-                ]
-              }
-            },
-            "named": true,
-            "value": "shorthandFace"
           },
           {
             "type": "SYMBOL",
@@ -565,14 +517,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "specialIndex"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "wrapFace",
-          "content": {
-            "type": "SYMBOL",
-            "name": "wrapFace"
           }
         },
         {
@@ -953,6 +897,10 @@
         {
           "type": "SYMBOL",
           "name": "dotketTall"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dotlusTall"
         },
         {
           "type": "SYMBOL",
@@ -11382,10 +11330,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "wrapFace"
-        },
-        {
-          "type": "SYMBOL",
           "name": "typeUnion"
         },
         {
@@ -11479,27 +11423,6 @@
           {
             "type": "STRING",
             "value": "_"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_hoonWide"
-          }
-        ]
-      }
-    },
-    "wrapFace": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_skinWide"
-          },
-          {
-            "type": "STRING",
-            "value": "="
           },
           {
             "type": "SYMBOL",
@@ -11717,8 +11640,17 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "_hoonWide"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_hoonWide"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_specWide"
+                      }
+                    ]
                   },
                   {
                     "type": "REPEAT",
@@ -11730,8 +11662,17 @@
                           "name": "_space"
                         },
                         {
-                          "type": "SYMBOL",
-                          "name": "_hoonWide"
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "_hoonWide"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "_specWide"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -11776,25 +11717,29 @@
       }
     },
     "mold": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "?"
-        },
-        {
-          "type": "STRING",
-          "value": "^"
-        },
-        {
-          "type": "STRING",
-          "value": "~"
-        },
-        {
-          "type": "STRING",
-          "value": "*"
-        }
-      ]
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "?"
+          },
+          {
+            "type": "STRING",
+            "value": "^"
+          },
+          {
+            "type": "STRING",
+            "value": "~"
+          },
+          {
+            "type": "STRING",
+            "value": "*"
+          }
+        ]
+      }
     },
     "increment": {
       "type": "SEQ",
@@ -13023,6 +12968,98 @@
           "value": "}"
         }
       ]
+    },
+    "faceSpec": {
+      "type": "PREC_LEFT",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "face",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "name"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "aura"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "term"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "mold"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "FIELD",
+            "name": "spec",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "name"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "aura"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "term"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "mold"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "cell"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "gateCall"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "shorthandFaceSpec": {
+      "type": "PREC_LEFT",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "name"
+            }
+          }
+        ]
+      }
     }
   },
   "extras": [
@@ -13035,6 +13072,14 @@
     [
       "mold",
       "parent"
+    ],
+    [
+      "mold",
+      "bunt"
+    ],
+    [
+      "zapwutTall",
+      "mold"
     ],
     [
       "buclusTall",
@@ -13122,6 +13167,17 @@
     [
       "_runeWide",
       "_wingWide"
+    ],
+    [
+      "faceSpec",
+      "name"
+    ],
+    [
+      "faceSpec",
+      "aura"
+    ],
+    [
+      "_specWide"
     ],
     [
       "path"
