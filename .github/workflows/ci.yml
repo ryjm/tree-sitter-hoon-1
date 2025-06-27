@@ -1,0 +1,170 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Generate parser
+      run: npx tree-sitter generate
+
+    - name: Run tests
+      run: npx tree-sitter test
+
+    - name: Build WASM
+      if: matrix.os == 'ubuntu-latest' && matrix.node-version == '20.x'
+      run: npx tree-sitter build-wasm
+
+    - name: Upload WASM artifact
+      if: matrix.os == 'ubuntu-latest' && matrix.node-version == '20.x'
+      uses: actions/upload-artifact@v3
+      with:
+        name: tree-sitter-hoon.wasm
+        path: tree-sitter-hoon.wasm
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Check grammar formatting
+      run: |
+        npx tree-sitter generate
+        git diff --exit-code
+
+  rust-bindings:
+    name: Test Rust bindings
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Generate parser
+      run: npx tree-sitter generate
+
+    - name: Test Rust bindings
+      run: |
+        cd bindings/rust
+        cargo test
+        cargo build --release
+
+  publish-check:
+    name: Publish Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Generate parser
+      run: npx tree-sitter generate
+
+    - name: Check package
+      run: npm pack --dry-run
+
+  coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Generate parser
+      run: npx tree-sitter generate
+
+    - name: Run tests with coverage
+      run: |
+        npx tree-sitter test
+        # Add coverage reporting when available
+
+  examples:
+    name: Test Examples
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Generate parser
+      run: npx tree-sitter generate
+
+    - name: Test parsing examples
+      run: |
+        # Create examples directory if it doesn't exist
+        mkdir -p examples
+        
+        # Create a simple example if none exist
+        if [ ! -f examples/hello.hoon ]; then
+          echo '|=  name=@t' > examples/hello.hoon
+          echo '~&  "Hello, {(trip name)}!"' >> examples/hello.hoon
+          echo 'name' >> examples/hello.hoon
+        fi
+        
+        # Parse all example files
+        for file in examples/*.hoon; do
+          if [ -f "$file" ]; then
+            echo "Parsing $file"
+            npx tree-sitter parse "$file"
+          fi
+        done

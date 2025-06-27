@@ -1,83 +1,228 @@
-;; Hoon TreeSitter Queries for Neovim
-;; Place this file in ~/.config/nvim/after/queries/hoon/highlights.scm
-(rune) @operator
+;; Hoon Tree-sitter Syntax Highlighting
+;; Comprehensive highlighting patterns for all Hoon constructs
 
-;; Basic elements
+;; Comments
 (lineComment) @comment
-(name) @label
-(term) @constant
+
+;; Literals and Constants
 (number) @number
 (string) @string
-(boolean) @boolean
-
-;; Special constructs
-(cell) @punctuation.bracket
-(gateCall) @function.call
-(mold) @type
-
-;; Aura and special types
+(boolean) @constant.builtin
+(date) @string.special
+(cord) @string
+(tape) @string
+(knot) @string.special.symbol
+(term) @constant
 (aura) @type.builtin
-(fullContext) @constant.builtin
-(stripFace) @constant.builtin
+(mold) @type
+(unicode) @string.special
+(ipAddress) @string.special.path
+(bitcoinAddress) @string.special
+(phonemic) @string.special
 
-;; Terminators
-(seriesTerminator) @punctuation.delimiter
-(coreTerminator) @punctuation.delimiter
+;; Paths and Navigation
+(path) @string.special.path
+(lark) @operator
+(fullContext) @variable.builtin
+(stripFace) @operator
+(parent) @variable.builtin
+(specialIndex) @number
 
-;; Highlighting for special characters
-["(" ")" "[" "]" "{" "}" "," "."] @punctuation.delimiter
+;; Names and Identifiers
+(name) @variable
+(armName) @function
+(label) @label
 
+;; Runes (categorized by function)
+;; All runes
+(rune) @keyword
+
+;; Core construction runes
+(barcenTall (rune) @keyword.function)      ; |%
+(barcabTall (rune) @keyword.function)      ; |_
+(bartisTall (rune) @keyword.function)      ; |=
+(bardotTall (rune) @keyword.function)      ; |.
+(barhepTall (rune) @keyword.repeat)        ; |-
+(barketTall (rune) @keyword.function)      ; |^
+(barcolTall (rune) @keyword.function)      ; |:
+(barbucTall (rune) @keyword.function)      ; |$
+
+;; Arm definitions
+(luslusTall (rune) @keyword.function)      ; ++
+(lusbucTall (rune) @type.definition)       ; +$
+(lusbarTall (rune) @keyword.modifier)      ; +|
+(lustarTall (rune) @keyword.import)        ; +*
+
+;; Control flow
+(wutcolTall (rune) @conditional)          ; ?:
+(wutdotTall (rune) @conditional)          ; ?.
+(wutlusTall (rune) @conditional)          ; ?+
+(wuthepTall (rune) @conditional)          ; ?-
+(wutgarTall (rune) @conditional)          ; ?>
+(wutgalTall (rune) @conditional)          ; ?<
+(wutbarTall (rune) @conditional)          ; ?|
+(wutpamTall (rune) @conditional)          ; ?&
+(wutketTall (rune) @conditional)          ; ?^
+(wutpatTall (rune) @conditional)          ; ?@
+(wutsigTall (rune) @conditional)          ; ?~
+(wuttisTall (rune) @conditional)          ; ?=
+(wutzapTall (rune) @conditional)          ; ?!
+
+;; Subject modification
+(tisgarTall (rune) @keyword.operator)     ; =>
+(tisgalTall (rune) @keyword.operator)     ; =<
+(tislusTall (rune) @keyword.operator)     ; =/
+(tisbarTall (rune) @keyword.operator)     ; =|
+(tiscolTall (rune) @keyword.operator)     ; =:
+(tisdotTall (rune) @keyword.operator)     ; =.
+(tisketTall (rune) @keyword.operator)     ; =^
+(tistarTall (rune) @keyword.operator)     ; =*
+(tishepTall (rune) @keyword.operator)     ; =-
+(tissigTall (rune) @keyword.operator)     ; =~
+(tismicTall (rune) @keyword.operator)     ; =;
+(tiscomTall (rune) @keyword.operator)     ; =,
+(tisfasTall (rune) @keyword.operator)     ; =/
+(tiswutTall (rune) @keyword.operator)     ; =?
+
+;; Type construction
+(buccolTall (rune) @type)                 ; $:
+(bucbarTall (rune) @type)                 ; $|
+(bucpamTall (rune) @type)                 ; $&
+(bucketTall (rune) @type)                 ; $^
+(bucpatTall (rune) @type)                 ; $@
+(bucsigTall (rune) @type)                 ; $~
+(buccenTall (rune) @type)                 ; $%
+(bucwutTall (rune) @type)                 ; $?
+(buclusTall (rune) @type)                 ; $+
+(buccabTall (rune) @type)                 ; $_
+(buchepTall (rune) @type)                 ; $-
+(bucgarTall (rune) @type)                 ; $>
+(bucgalTall (rune) @type)                 ; $<
+(buctisTall (rune) @type)                 ; $=
+
+;; Hints and debugging
+(sigbarTall (rune) @keyword.debug)        ; ~|
+(siggarTall (rune) @keyword.debug)        ; ~>
+(siggalTall (rune) @keyword.debug)        ; ~<
+(siglusTall (rune) @keyword.debug)        ; ~+
+(sigpamTall (rune) @keyword.debug)        ; ~&
+(sigtisTall (rune) @keyword.debug)        ; ~=
+(sigwutTall (rune) @keyword.debug)        ; ~?
+(sigzapTall (rune) @keyword.debug)        ; ~!
+(sigfasTall (rune) @keyword.debug)        ; ~/
+(sigcenTall (rune) @keyword.debug)        ; ~%
+(sigbucTall (rune) @keyword.debug)        ; ~$
+(sigcabTall (rune) @keyword.debug)        ; ~_
+
+;; Miscellaneous operations
+(ketbarTall (rune) @operator)             ; ^|
+(kethepTall (rune) @operator)             ; ^-
+(ketlusTall (rune) @operator)             ; ^+
+(kettisTall (rune) @operator)             ; ^=
+(ketcolTall (rune) @operator)             ; ^:
+(ketdotTall (rune) @operator)             ; ^.
+(ketwutTall (rune) @operator)             ; ^?
+(ketpamTall (rune) @operator)             ; ^&
+(ketsigTall (rune) @operator)             ; ^~
+(kettarTall (rune) @operator)             ; ^*
+
+;; Constant operations
+(dotlusTall (rune) @operator)             ; .+
+(dottisTall (rune) @operator)             ; .=
+(dotketTall (rune) @operator)             ; .^
+(dotwutTall (rune) @operator)             ; .?
+(dottarTall (rune) @operator)             ; .*
+
+;; Core operations
+(cenlusTall (rune) @operator)             ; %+
+(cenhepTall (rune) @operator)             ; %-
+(cencolTall (rune) @operator)             ; %:
+(cendotTall (rune) @operator)             ; %.
+(cenketTall (rune) @operator)             ; %^
+(centisTall (rune) @operator)             ; %=
+(centarTall (rune) @operator)             ; %*
+(censigTall (rune) @operator)             ; %~
+(cencabTall (rune) @operator)             ; %_
+
+;; Collections
+(colhepTall (rune) @constructor)          ; :-
+(collusTall (rune) @constructor)          ; :+
+(colketTall (rune) @constructor)          ; :^
+(coltarTall (rune) @constructor)          ; :*
+(colsigTall (rune) @constructor)          ; :~
+(colcabTall (rune) @constructor)          ; :_
+
+;; Evaluation
+(zaptisTall (rune) @operator)             ; !=
+(zapgalTall (rune) @operator)             ; !<
+(zapgarTall (rune) @operator)             ; !>
+(zapcolTall (rune) @operator)             ; !:
+(zapmicTall (rune) @operator)             ; !;
+(zapwutTall (rune) @operator)             ; !?
+(zappatTall (rune) @operator)             ; !@
+(zapdotTall (rune) @operator)             ; !.
+(zapcomTall (rune) @operator)             ; !,
+(zapzap) @operator                         ; !!
+
+;; Sail (XML) constructs
 (sailTagTall (name) @tag)
 (sailTagWide (name) @tag)
 (sailId) @property
 (sailClass) @attribute
-(sailAttributeTall) @attribute(number) @number
-(sailAttributeWide) @attribute(number) @number
+(sailAttributeTall) @attribute
+(sailAttributeWide) @attribute
 
-(string) @string
+;; Terminators and delimiters
+(seriesTerminator) @punctuation.delimiter
+(coreTerminator) @punctuation.delimiter
 
+;; Punctuation
 [
   "("
   ")"
   "["
   "]"
+  "{"
+  "}"
 ] @punctuation.bracket
 
 [
-  (coreTerminator)
-  (seriesTerminator)
+  ","
+  "."
+  ";"
+  ":"
 ] @punctuation.delimiter
 
-(term) @constant
+;; Function calls and special forms
+(gateCall (name) @function.call)
+(cell) @punctuation.bracket
 
-(aura) @constant.builtin
+;; Special highlighting for common patterns
+((luslusTall
+  armName: (name) @function.definition))
 
-(lineComment) @comment
+((lusbucTall
+  name: (name) @type.definition))
 
-(boolean) @constant.builtin
+((tislusTall
+  (name) @variable.definition))
 
-(date) @string.special
+;; Irregular forms get special highlighting
+(increment) @operator
+(decrement) @operator
+(typeUnion) @type
+(normalize) @type
 
-(mold) @string.special.symbol
+;; Highlight certain conventional arm names
+((luslusTall
+  armName: (name) @function.builtin
+  (#match? @function.builtin "^(on-\\w+|ab|by|in|ja|ju|my|og|so|to|ut|yo|za)$")))
 
-(specialIndex) @number
+;; Test arms
+((luslusTall
+  armName: (name) @function.test
+  (#match? @function.test "^test-")))
 
-(lark) @operator
-
-(fullContext) @string.special.symbol
-;; Core runes
-(luslusTall (rune) @module)  ;; ++
-(lusbucTall (rune) @type.definition)     ;; +$
-(bartisTall (rune) @function) ;; |=
-
-;; Other common runes
-(colhepTall (_) @constructor) ;; :-
-(collusTall (rune) @constructor) ;; :+
-(bardotTall (rune) @keyword.builtin)  ;; |.
-(barhepTall (rune) @function.repeat)  ;; |-
-(tisgarTall (rune) @keyword.modifier) ;; =>
-(centisWide (rune) @keyword.modifier) ;; %=
-(wutcolTall (rune) @keyword.conditional) ;; ?:
-(wutdotTall (rune) @keyword.conditional) ;; ?.
-(tisfasTall (rune) @variable.builtin) ;; =/
+;; Error highlighting for common mistakes
+(ERROR) @error
 

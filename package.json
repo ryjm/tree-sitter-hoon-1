@@ -1,46 +1,88 @@
 {
   "name": "tree-sitter-hoon",
   "version": "0.0.2",
-  "description": "Hoon parser written using the tree-sitter grammar.",
+  "description": "Tree-sitter grammar for Hoon, the Urbit programming language",
+  "keywords": [
+    "tree-sitter",
+    "hoon",
+    "urbit",
+    "parser",
+    "syntax",
+    "grammar",
+    "incremental"
+  ],
+  "homepage": "https://github.com/urbit-pilled/tree-sitter-hoon#readme",
+  "bugs": {
+    "url": "https://github.com/urbit-pilled/tree-sitter-hoon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urbit-pilled/tree-sitter-hoon.git"
+  },
+  "license": "MIT",
+  "author": "urbit-pilled",
   "main": "bindings/node",
   "types": "bindings/node",
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "bindings/rust/",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
   "scripts": {
-    "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --napi --strip",
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "build:wasm": "tree-sitter build-wasm",
+    "test": "tree-sitter test",
+    "test:update": "tree-sitter test -u",
+    "test:filter": "tree-sitter test -f",
+    "parse": "tree-sitter parse",
+    "highlight": "tree-sitter highlight",
+    "playground": "tree-sitter playground",
+    "prepare": "tree-sitter generate",
+    "prepublishOnly": "npm test",
+    "lint": "tree-sitter generate && git diff --exit-code",
+    "clean": "rm -rf build node_modules",
+    "watch": "nodemon -w grammar.js -x 'npm run build && npm test'"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
   },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.20.8"
+  },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.20.0"
   },
   "peerDependenciesMeta": {
-    "tree_sitter": {
+    "tree-sitter": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "tree-sitter-javascript": "^0.19.0",
-    "prebuildify": "^6.0.0"
   },
   "tree-sitter": [
     {
       "scope": "source.hoon",
       "file-types": [
         "hoon"
-      ]
+      ],
+      "highlights": "queries/highlights.scm",
+      "tags": "queries/tags.scm",
+      "locals": "queries/locals.scm",
+      "injection-regex": "^hoon$"
     }
   ],
-  "files": [
-    "grammar.js",
-    "binding.gyp",
-    "prebuilds/**",
-    "bindings/node/*",
-    "queries/*",
-    "src/**"
-  ]
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

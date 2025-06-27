@@ -1,0 +1,371 @@
+==================
+deeply_nested_cells
+==================
+[[[1 2] [3 4]] [[5 6] [7 8]]]
+---
+
+(source_file
+  (cell
+    (cell
+      (cell (number) (number))
+      (cell (number) (number)))
+    (cell
+      (cell (number) (number))
+      (cell (number) (number)))))
+
+==================
+complex_wing_path
+==================
+a.b.c.d.e.f
+---
+
+(source_file
+  (wingPath
+    (name)
+    (name)
+    (name)
+    (name)
+    (name)
+    (name)))
+
+==================
+nested_gate_calls
+==================
+(foo (bar (baz 42)))
+---
+
+(source_file
+  (gateCall
+    (name)
+    (gateCall
+      (name)
+      (gateCall
+        (name)
+        (number)))))
+
+==================
+mixed_tall_wide_forms
+==================
+?:  flag
+  (add 2 2)
+=/  result  42
+result
+---
+
+(source_file
+  (wutcolTall
+    (rune)
+    (Gap)
+    (name)
+    (Gap)
+    (gateCall (name) (number) (number)))
+  (Gap)
+  (tislusTall
+    (rune)
+    (Gap)
+    (name)
+    (Gap)
+    (number))
+  (Gap)
+  (name))
+
+==================
+complex_type_union
+==================
+$%  [%foo p=@ q=@]
+    [%bar p=^]
+    [%baz p=(list @)]
+==
+---
+
+(source_file
+  (buccenTall
+    (rune)
+    (Gap)
+    (cell
+      (term)
+      (wrapFace (name) (aura))
+      (wrapFace (name) (aura)))
+    (Gap)
+    (cell
+      (term)
+      (wrapFace (name) (kettle)))
+    (Gap)
+    (cell
+      (term)
+      (wrapFace
+        (name)
+        (gateCall (name) (aura))))
+    (Gap)
+    (seriesTerminator)))
+
+==================
+sail_with_attributes_and_content
+==================
+;div(class "container", id "main")
+  ;h1: Hello World
+  ;p: This is a paragraph
+==
+---
+
+(source_file
+  (sailExpression
+    (sailTall
+      (sailTagTall
+        (name)
+        (sailAttributeTall
+          (name)
+          (string))
+        (sailAttributeTall
+          (name)
+          (string)))
+      (Gap)
+      (sailExpression
+        (sailTall
+          (sailTagTall (name))
+          (string)))
+      (Gap)
+      (sailExpression
+        (sailTall
+          (sailTagTall (name))
+          (string)))
+      (Gap)
+      (seriesTerminator))))
+
+==================
+complex_pattern_matching
+==================
+?-  input
+  [%foo *]  (handle-foo +.input)
+  [%bar @ ^]  (handle-bar +<.input +>.input)
+  [%baz *]  (handle-baz +.input)
+==
+---
+
+(source_file
+  (wuthepTall
+    (rune)
+    (Gap)
+    (name)
+    (Gap)
+    (cell (term) (kettle))
+    (Gap)
+    (gateCall (name) (wingPath (lark) (name)))
+    (Gap)
+    (cell (term) (aura) (kettle))
+    (Gap)
+    (gateCall
+      (name)
+      (wingPath (lark) (lark) (name))
+      (wingPath (lark) (lark) (name)))
+    (Gap)
+    (cell (term) (kettle))
+    (Gap)
+    (gateCall (name) (wingPath (lark) (name)))
+    (Gap)
+    (seriesTerminator)))
+
+==================
+core_with_multiple_arms
+==================
+|%
+++  foo  42
+++  bar  "hello"
+++  baz
+  |=  a=@
+  (add a 1)
++$  item  [p=@ q=@]
+--
+---
+
+(source_file
+  (barcenTall
+    (rune)
+    (Gap)
+    (luslusTall (rune) (Gap) (name) (Gap) (number))
+    (Gap)
+    (luslusTall (rune) (Gap) (name) (Gap) (string))
+    (Gap)
+    (luslusTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (bartisTall
+        (rune)
+        (Gap)
+        (wrapFace (name) (aura))
+        (Gap)
+        (gateCall (name) (name) (number))))
+    (Gap)
+    (lusbucTall
+      (rune)
+      (Gap)
+      (name)
+      (Gap)
+      (cell
+        (wrapFace (name) (aura))
+        (wrapFace (name) (aura))))
+    (Gap)
+    (coreTerminator)))
+
+==================
+irregular_increment_decrement
+==================
++(42)
+-(100)
++(+(+(0)))
+---
+
+(source_file
+  (increment (number))
+  (Gap)
+  (decrement (number))
+  (Gap)
+  (increment
+    (increment
+      (increment (number)))))
+
+==================
+type_with_face_and_default
+==================
+$=(foo $~(42 @))
+---
+
+(source_file
+  (buctisWide
+    (rune)
+    (name)
+    (bucsigWide
+      (rune)
+      (number)
+      (aura))))
+
+==================
+complex_subject_modification
+==================
+=>  [a=1 b=2]
+=<  (add a b)
+|%
+++  add  |=([p=@ q=@] (^add p q))
+--
+---
+
+(source_file
+  (tisgarTall
+    (rune)
+    (Gap)
+    (cell
+      (wrapFace (name) (number))
+      (wrapFace (name) (number)))
+    (Gap)
+    (tisgalTall
+      (rune)
+      (Gap)
+      (gateCall (name) (name) (name))
+      (Gap)
+      (barcenTall
+        (rune)
+        (Gap)
+        (luslusTall
+          (rune)
+          (Gap)
+          (name)
+          (Gap)
+          (bartisTall
+            (rune)
+            (Gap)
+            (cell
+              (wrapFace (name) (aura))
+              (wrapFace (name) (aura)))
+            (Gap)
+            (gateCall
+              (fullContext)
+              (name)
+              (name))))
+        (Gap)
+        (coreTerminator)))))
+
+==================
+empty_constructs
+==================
+~
+[]
+""
+''
+---
+
+(source_file
+  (null)
+  (Gap)
+  (cell)
+  (Gap)
+  (tape)
+  (Gap)
+  (cord))
+
+==================
+special_paths_and_indices
+==================
+/foo/bar/baz
+&1
+&2.3.4
+---
+
+(source_file
+  (path (knot) (knot) (knot))
+  (Gap)
+  (specialIndex)
+  (Gap)
+  (specialIndex))
+
+==================
+complex_conditional_chain
+==================
+?:  =(a 1)  "one"
+?:  =(a 2)  "two"
+?:  =(a 3)  "three"
+"other"
+---
+
+(source_file
+  (wutcolTall
+    (rune)
+    (Gap)
+    (dottisWide (rune) (name) (number))
+    (Gap)
+    (string)
+    (Gap)
+    (wutcolTall
+      (rune)
+      (Gap)
+      (dottisWide (rune) (name) (number))
+      (Gap)
+      (string)
+      (Gap)
+      (wutcolTall
+        (rune)
+        (Gap)
+        (dottisWide (rune) (name) (number))
+        (Gap)
+        (string)
+        (Gap)
+        (string)))))
+
+==================
+unicode_and_special_literals
+==================
+~-foo.bar
+@ux.dead.beef
+@p~zod
+@da~2021.1.1
+---
+
+(source_file
+  (unicode)
+  (Gap)
+  (hexadecimal)
+  (Gap)
+  (phonemic)
+  (Gap)
+  (date))
