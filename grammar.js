@@ -2026,7 +2026,6 @@ _labelWide: ($) => choice(
     [$._skinWide, $._value],
     [$.increment, $.lark],
     [$._specWide, $.factoryGate],
-    [$.shorthandFace, $._specWide],
     [$._runeWide, $._wingWide],
     [$.path],
     [$.censigTall, $.term],
