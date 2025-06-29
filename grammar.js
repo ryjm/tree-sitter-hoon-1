@@ -32,7 +32,7 @@ module.exports = grammar({
       //   repeat1(seq($.sailExpression, $._Gap)),
       //   $.seriesTerminator,
       // ),
-      // sailMicfas: ($) => seq(";/", $._space, $.string),
+      // sailMicfas: ($) => seq(";/", " ", $.string),
 
       // Modify existing rules to avoid conflicts
       _value: ($) => choice(
@@ -200,6 +200,10 @@ _labelWide: ($) => choice(
 
     _runeTall: ($) =>
       choice(
+        $.luslusTall,
+        $.lusbucTall,
+        $.lusbarTall,
+        $.lustarTall,
         $.barbucTall,
         $.barcabTall,
         $.barcolTall,
@@ -409,7 +413,7 @@ _labelWide: ($) => choice(
         $.zapzap
       ),
 
-    _lusTall: ($) => choice($.luslusTall, $.lusbucTall, $.lusbarTall),
+    _lusTall: ($) => choice($.luslusTall, $.lusbucTall, $.lusbarTall, $.lustarTall),
 
     _bucTall: ($) =>
       choice(
@@ -446,14 +450,14 @@ _labelWide: ($) => choice(
         $.bucwutWide
       ),
 
-    lusbarTall: ($) => seq(alias("+|", $.rune), $._Gap, $._labelTall),
+    lusbarTall: ($) => prec(10, seq(alias(token("+|"), $.rune), $._Gap, $._labelTall)),
     lusbucTall: ($) =>
-      seq(alias("+$", $.rune), $._Gap, field('name', $.name), $._Gap, $._specTall),
+      prec(10, seq(alias(token("+$"), $.rune), $._Gap, field('name', $.name), $._Gap, $._specTall)),
     luslusTall: ($) =>
-      seq(alias("++", $.rune), $._Gap, field('armName', $.name), $._Gap, field('armBody', $._hoonTall)),
+      prec(10, seq(alias(token("++"), $.rune), $._Gap, field('armName', $.name), $._Gap, field('armBody', $._hoonTall))),
 
     lustarTall: ($) =>
-      seq(alias("+*", $.rune), repeat1(seq($._Gap, field('alias', $.name), $._Gap, $._hoonTall))),
+      prec(10, seq(alias(token("+*"), $.rune), repeat1(seq($._Gap, field('alias', $.name), $._Gap, $._hoonTall)))),
     barbucTall: ($) =>
       seq(
         alias("|$", $.rune),
@@ -696,7 +700,7 @@ _labelWide: ($) => choice(
         repeat(
           seq(
             ",",
-            choice($._Gap, $._space),
+            choice($._Gap, " "),
             optional("*"),
             $.name,
             optional(seq("=", $.name))
@@ -714,7 +718,7 @@ _labelWide: ($) => choice(
         repeat(
           seq(
             ",",
-            choice($._Gap, $._space),
+            choice($._Gap, " "),
             optional("*"),
             $.name,
             optional(seq("=", $.name))
@@ -1068,7 +1072,7 @@ _labelWide: ($) => choice(
         seq(
           alias(seq("!", "?"), $.rune),
           $._Gap,
-          choice($.number, seq("[", $.number, $._space, $.number, "]")),
+          choice($.number, seq("[", $.number, " ", $.number, "]")),
           $._Gap,
           $._hoonTall
         )
@@ -1092,32 +1096,32 @@ _labelWide: ($) => choice(
         "(",
         choice(
           $.name,
-          seq("[", $._termWide, repeat(seq($._space, $._termWide)), "]")
+          seq("[", $._termWide, repeat(seq(" ", $._termWide)), "]")
         ),
-        $._space,
+        " ",
         $._specWide,
         ")"
       ),
     barcolWide: ($) =>
-      seq(alias("|:", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("|:", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     bardotWide: ($) => seq(alias("|.", $.rune), "(", $._hoonWide, ")"),
     barhepWide: ($) => seq(alias("|-", $.rune), "(", $._hoonWide, ")"),
     barsigWide: ($) =>
-      seq(alias("|~", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("|~", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     bartarWide: ($) =>
-      seq(alias("|*", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("|*", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     bartisWide: ($) =>
-      seq(alias("|=", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("|=", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     barwutWide: ($) => seq(alias("|?", $.rune), "(", $._hoonWide, ")"),
     bucbarWide: ($) =>
-      seq(alias("$|", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("$|", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     buccabWide: ($) => seq(alias("$_", $.rune), "(", $._hoonWide, ")"),
     buccenWide: ($) =>
       seq(
         alias("$%", $.rune),
         "(",
         $._specWide,
-        repeat(seq($._space, $._specWide)),
+        repeat(seq(" ", $._specWide)),
         ")"
       ),
     buccolWide: ($) =>
@@ -1125,40 +1129,40 @@ _labelWide: ($) => choice(
         alias(seq("$", ":"), $.rune),
         "(",
         $._specWide,
-        repeat(seq($._space, $._specWide)),
+        repeat(seq(" ", $._specWide)),
         ")"
       ),
     bucgalWide: ($) =>
-      seq(alias("$<", $.rune), "(", $._specWide, $._space, $._specWide, ")"),
+      seq(alias("$<", $.rune), "(", $._specWide, " ", $._specWide, ")"),
     bucgarWide: ($) =>
-      seq(alias("$>", $.rune), "(", $._specWide, $._space, $._specWide, ")"),
+      seq(alias("$>", $.rune), "(", $._specWide, " ", $._specWide, ")"),
     buchepWide: ($) =>
-      seq(alias("$-", $.rune), "(", $._specWide, $._space, $._specWide, ")"),
+      seq(alias("$-", $.rune), "(", $._specWide, " ", $._specWide, ")"),
     bucketWide: ($) =>
-      seq(alias("$^", $.rune), "(", $._specWide, $._space, $._specWide, ")"),
+      seq(alias("$^", $.rune), "(", $._specWide, " ", $._specWide, ")"),
     buclusWide: ($) =>
       seq(
         alias(seq("$", "+"), $.rune),
         "(",
         $._studWide,
-        $._space,
+        " ",
         $._specWide,
         ")"
       ),
     bucpamWide: ($) =>
-      seq(alias("$&", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("$&", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     bucsigWide: ($) =>
-      seq(alias("$~", $.rune), "(", $._hoonWide, $._space, $._specWide, ")"),
+      seq(alias("$~", $.rune), "(", $._hoonWide, " ", $._specWide, ")"),
     bucpatWide: ($) =>
-      seq(alias("$@", $.rune), "(", $._specWide, $._space, $._specWide, ")"),
+      seq(alias("$@", $.rune), "(", $._specWide, " ", $._specWide, ")"),
     buctisWide: ($) =>
-      seq(alias("$=", $.rune), "(", $._skinWide, $._space, $._specWide, ")"),
+      seq(alias("$=", $.rune), "(", $._skinWide, " ", $._specWide, ")"),
     bucwutWide: ($) =>
       seq(
         alias("$?", $.rune),
         "(",
         $._specWide,
-        repeat(seq($._space, $._specWide)),
+        repeat(seq(" ", $._specWide)),
         ")"
       ),
     cencabWide: ($) =>
@@ -1166,11 +1170,11 @@ _labelWide: ($) => choice(
         alias("%_", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._wingWide, $._space, $._hoonWide)),
+        repeat(seq(",", " ", $._wingWide, " ", $._hoonWide)),
         ")"
       ),
     cencolWide: ($) =>
@@ -1178,7 +1182,7 @@ _labelWide: ($) => choice(
         alias("%:", $.rune),
         "(",
         $._hoonWide,
-        repeat1(seq($._space, $._hoonWide)),
+        repeat1(seq(" ", $._hoonWide)),
         ")"
       ),
     cendotWide: ($) =>
@@ -1186,22 +1190,22 @@ _labelWide: ($) => choice(
         alias(seq("%", "."), $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     cenhepWide: ($) =>
-      seq(alias("%-", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("%-", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     cenketWide: ($) =>
       seq(
         alias("%^", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1210,9 +1214,9 @@ _labelWide: ($) => choice(
         alias("%+", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1221,9 +1225,9 @@ _labelWide: ($) => choice(
         alias(seq("%", "~"), $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1232,13 +1236,13 @@ _labelWide: ($) => choice(
         alias("%*", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._wingWide, $._space, $._hoonWide)),
+        repeat(seq(",", " ", $._wingWide, " ", $._hoonWide)),
         ")"
       ),
     centisWide: ($) =>
@@ -1246,25 +1250,25 @@ _labelWide: ($) => choice(
         alias("%=", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._wingWide, $._space, $._hoonWide)),
+        repeat(seq(",", " ", $._wingWide, " ", $._hoonWide)),
         ")"
       ),
     colhepWide: ($) =>
-      seq(alias(":-", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias(":-", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     colcabWide: ($) =>
-      seq(alias(":_", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias(":_", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     collusWide: ($) =>
       seq(
         alias(":+", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1273,11 +1277,11 @@ _labelWide: ($) => choice(
         alias(":^", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1286,7 +1290,7 @@ _labelWide: ($) => choice(
         alias(":*", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     colsigWide: ($) =>
@@ -1294,7 +1298,7 @@ _labelWide: ($) => choice(
         alias(":~", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     dotketWide: ($) =>
@@ -1302,37 +1306,37 @@ _labelWide: ($) => choice(
         alias(".^", $.rune),
         "(",
         $._specWide,
-        repeat1(seq($._space, $._hoonWide)),
+        repeat1(seq(" ", $._hoonWide)),
         ")"
       ),
     dotlusWide: ($) => seq(alias(".+", $.rune), "(", $._hoonWide, ")"),
     dottarWide: ($) =>
-      seq(alias(".*", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias(".*", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     dottisWide: ($) =>
-      seq(alias(".=", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias(".=", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     dotwutWide: ($) => seq(alias(".?", $.rune), "(", $._hoonWide, ")"),
     ketbarWide: ($) => seq(alias("^|", $.rune), "(", $._hoonWide, ")"),
     ketcolWide: ($) => seq(alias("^:", $.rune), "(", $._specWide, ")"),
     ketdotWide: ($) =>
-      seq(alias("^.", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("^.", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     kethepWide: ($) =>
-      seq(alias("^-", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("^-", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     ketlusWide: ($) =>
-      seq(alias("^+", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("^+", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     ketpamWide: ($) => seq(alias("^&", $.rune), "(", $._hoonWide, ")"),
     ketsigWide: ($) => seq(alias("^~", $.rune), "(", $._hoonWide, ")"),
     kettarWide: ($) => seq(alias("^*", $.rune), "(", $._specWide, ")"),
     kettisWide: ($) =>
-      seq(alias("^=", $.rune), "(", $._skinWide, $._space, $._hoonWide, ")"),
+      seq(alias("^=", $.rune), "(", $._skinWide, " ", $._hoonWide, ")"),
     ketwutWide: ($) => seq(alias("^?", $.rune), "(", $._hoonWide, ")"),
     miccolWide: ($) =>
       seq(
         alias(";:", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     micgalWide: ($) =>
@@ -1340,26 +1344,26 @@ _labelWide: ($) => choice(
         alias(";<", $.rune),
         "(",
         $._specWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     miclusWide: ($) => seq(alias(";+", $.rune), "(", $._hoonWide, ")"),
     micmicWide: ($) =>
-      seq(alias(";;", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias(";;", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     micfasWide: ($) => seq(alias(";/", $.rune), "(", $._hoonWide, ")"),
     micsigWide: ($) =>
       seq(
         alias(";~", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     mictarWide: ($) => seq(alias(";*", $.rune), "(", $._hoonWide, ")"),
@@ -1368,7 +1372,7 @@ _labelWide: ($) => choice(
         alias(";=", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     siggarWide: ($) =>
@@ -1377,102 +1381,102 @@ _labelWide: ($) => choice(
         "(",
         $._termWide,
         optional(seq(".", optional($._Gap), $._hoonWide)),
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     sigbarWide: ($) =>
-      seq(alias("~|", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~|", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     sigbucWide: ($) =>
-      seq(alias("~$", $.rune), "(", $._termWide, $._space, $._hoonWide, ")"),
+      seq(alias("~$", $.rune), "(", $._termWide, " ", $._hoonWide, ")"),
     sigcabWide: ($) =>
-      seq(alias("~_", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~_", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     siggalWide: ($) =>
       seq(
         alias("~<", $.rune),
         "(",
         $._termWide,
         optional(seq(".", optional($._Gap), $._hoonWide)),
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     siglusWide: ($) => seq(alias("~+", $.rune), "(", $._hoonWide, ")"),
     sigfasWide: ($) =>
-      seq(alias("~/", $.rune), "(", $._chumTall, $._space, $._hoonWide, ")"),
+      seq(alias("~/", $.rune), "(", $._chumTall, " ", $._hoonWide, ")"),
     sigpamWide: ($) =>
-      seq(alias("~&", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~&", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     sigtisWide: ($) =>
-      seq(alias("~=", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~=", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     sigwutWide: ($) =>
       seq(
         alias("~?", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     sigzapWide: ($) =>
-      seq(alias("~!", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~!", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tisgarWide: ($) =>
-      seq(alias("=>", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("=>", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tisbarWide: ($) =>
-      seq(alias("=|", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("=|", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     tiscolWide: ($) =>
       seq(
         alias("=:", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._wingWide, $._space, $._hoonWide)),
-        $._space,
+        repeat(seq(",", " ", $._wingWide, " ", $._hoonWide)),
+        " ",
         $._hoonWide,
         ")"
       ),
     tiscomWide: ($) =>
-      seq(alias("=,", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("=,", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tisdotWide: ($) =>
       seq(
         alias("=.", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     tishepWide: ($) =>
-      seq(alias("=-", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("=-", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tisketWide: ($) =>
       seq(
         alias("=^", $.rune),
         "(",
         $._skinWide,
-        $._space,
+        " ",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     tisgalWide: ($) =>
-      seq(alias("=<", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("=<", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tislusWide: ($) =>
-      seq(alias("=+", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("=+", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     tismicWide: ($) =>
       seq(
         alias("=;", $.rune),
         "(",
         $._skinWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1481,9 +1485,9 @@ _labelWide: ($) => choice(
         alias("=/", $.rune),
         "(",
         field("name", $._skinWide),
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1492,7 +1496,7 @@ _labelWide: ($) => choice(
         alias("=~", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     tistarWide: ($) =>
@@ -1500,9 +1504,9 @@ _labelWide: ($) => choice(
         alias("=*", $.rune),
         "(",
         choice($._termWide, seq($.name, "=", $._specWide)),
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1511,11 +1515,11 @@ _labelWide: ($) => choice(
         alias("=?", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1524,7 +1528,7 @@ _labelWide: ($) => choice(
         alias("?|", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     wuthepWide: ($) =>
@@ -1532,11 +1536,11 @@ _labelWide: ($) => choice(
         alias("?-", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._specWide,
-        $._space,
+        " ",
         $._valueWide,
-        repeat(seq(",", $._space, $._specWide, $._space, $._valueWide)),
+        repeat(seq(",", " ", $._specWide, " ", $._valueWide)),
         ")"
       ),
     wutcolWide: ($) =>
@@ -1544,9 +1548,9 @@ _labelWide: ($) => choice(
         alias(seq("?", ":"), $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1555,9 +1559,9 @@ _labelWide: ($) => choice(
         alias("?.", $.rune),
         "(",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1566,28 +1570,28 @@ _labelWide: ($) => choice(
         alias("?^", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     wutgalWide: ($) =>
-      seq(alias("?<", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("?<", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     wutgarWide: ($) =>
-      seq(alias("?>", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("?>", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     wutlusWide: ($) =>
       seq(
         alias("?+", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._specWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._specWide, $._space, $._hoonWide)),
+        repeat(seq(",", " ", $._specWide, " ", $._hoonWide)),
         ")"
       ),
     wutpamWide: ($) =>
@@ -1595,7 +1599,7 @@ _labelWide: ($) => choice(
         alias("?&", $.rune),
         "(",
         $._hoonWide,
-        repeat(seq($._space, $._hoonWide)),
+        repeat(seq(" ", $._hoonWide)),
         ")"
       ),
     wutpatWide: ($) =>
@@ -1603,9 +1607,9 @@ _labelWide: ($) => choice(
         alias("?@", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1614,22 +1618,22 @@ _labelWide: ($) => choice(
         alias("?~", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
     wuttisWide: ($) =>
-      seq(alias("?=", $.rune), "(", $._specWide, $._space, $._wingWide, ")"),
+      seq(alias("?=", $.rune), "(", $._specWide, " ", $._wingWide, ")"),
     wutzapWide: ($) => seq(alias("?!", $.rune), "(", $._hoonWide, ")"),
     zapcomWide: ($) =>
-      seq(alias("!,", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("!,", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     zapgarWide: ($) => seq(alias("!>", $.rune), "(", $._hoonWide, ")"),
     zapgalWide: ($) =>
-      seq(alias("!<", $.rune), "(", $._specWide, $._space, $._hoonWide, ")"),
+      seq(alias("!<", $.rune), "(", $._specWide, " ", $._hoonWide, ")"),
     zapmicWide: ($) =>
-      seq(alias("!;", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("!;", $.rune), "(", $._hoonWide, " ", $._hoonWide, ")"),
     zaptisWide: ($) =>
       prec(1, seq(alias(seq("!", "="), $.rune), "(", $._hoonWide, ")")),
     zapwutWide: ($) =>
@@ -1638,8 +1642,8 @@ _labelWide: ($) => choice(
         seq(
           alias(seq("!", "?"), $.rune),
           "(",
-          choice($.number, seq("[", $.number, $._space, $.number, "]")),
-          $._space,
+          choice($.number, seq("[", $.number, " ", $.number, "]")),
+          " ",
           $._hoonWide,
           ")"
         )
@@ -1649,9 +1653,9 @@ _labelWide: ($) => choice(
         alias("!@", $.rune),
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        $._space,
+        " ",
         $._hoonWide,
         ")"
       ),
@@ -1675,7 +1679,7 @@ _labelWide: ($) => choice(
 
       sailTagContent: ($) => prec.left(repeat1(seq(
         field("content", choice(
-          seq(optional($._Gap), ";", choice($._space, $._Gap), optional($.name)),
+          seq(optional($._Gap), ";", choice(" ", $._Gap), optional($.name)),
           seq(optional($._Gap), $._sailRunes),
           seq(optional($._Gap), $.sailExpression),
         ))
@@ -1695,7 +1699,7 @@ _labelWide: ($) => choice(
         seq(";", field("tagName", $.name)),
         optional(field("attributes", repeat($.sailTagAttributesWide))),
         choice(
-          seq(":", $._space, field("content", $.sailContent)), // Inline content
+          seq(":", " ", field("content", $.sailContent)), // Inline content
           ";"
 
         ))
@@ -1712,7 +1716,7 @@ _labelWide: ($) => choice(
 
       sailAttributeWide: ($) => seq("(", field("pairs", commaSep($.sailAttributePair)), ")"),
       sailAttributeTall: ($) => seq("=", field("name", $.name), $._Gap, field("value", $.string)),
-      sailAttributePair: ($) => seq(field("name", $.name), $._space, field("value", $.string)),
+      sailAttributePair: ($) => seq(field("name", $.name), " ", field("value", $.string)),
 
       sailId: ($) => prec(1, seq("#", field("value", $.name))),
       sailClass: ($) => prec(1, seq(".", field("value", $.name))),
@@ -1751,16 +1755,16 @@ _labelWide: ($) => choice(
 
     normalize: ($) => prec.left(2, seq("_", $._hoonWide)),
     typeUnion: ($) =>
-      seq("?", "(", $._specWide, repeat(seq($._space, $._specWide)), ")"),
+      seq("?", "(", $._specWide, repeat(seq(" ", $._specWide)), ")"),
     gateCall: ($) =>
-      seq("(", $._hoonWide, repeat(seq($._space, $._hoonWide)), ")"),
+      seq("(", $._hoonWide, repeat(seq(" ", $._hoonWide)), ")"),
     pullArmInDoor: ($) =>
       seq(
         "~(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat1(seq($._space, $._hoonWide)),
+        repeat1(seq(" ", $._hoonWide)),
         ")"
       ),
     resolveWingWithChanges: ($) =>
@@ -1768,25 +1772,25 @@ _labelWide: ($) => choice(
         $._wingWide,
         "(",
         $._wingWide,
-        $._space,
+        " ",
         $._hoonWide,
-        repeat(seq(",", $._space, $._wingWide, $._space, $._hoonWide)),
+        repeat(seq(",", " ", $._wingWide, " ", $._hoonWide)),
         ")"
       ),
     cell: ($) =>
       prec.right(2, seq(
         optional("~"),
         "[",
-        optional($._space),
+        optional(" "),
         choice(
           // For cells in spec contexts, allow spec-wide elements including wrapFace
           seq(
             choice($._hoonWide, $._specWide),
-            repeat(seq($._space, choice($._hoonWide, $._specWide)))
+            repeat(seq(" ", choice($._hoonWide, $._specWide)))
           ),
           seq() // empty cell
         ),
-        optional($._space),
+        optional(" "),
         "]",
         optional("~")
       )),
@@ -1794,31 +1798,31 @@ _labelWide: ($) => choice(
     mold: ($) => prec(1, choice("?", "^", "~", "*")),
     increment: ($) => seq("+", "(", $._hoonWide, ")"),
     equality: ($) =>
-      prec(1, seq("=", "(", $._hoonWide, $._space, $._hoonWide, ")")),
+      prec(1, seq("=", "(", $._hoonWide, " ", $._hoonWide, ")")),
     typeCast: ($) => seq("`", $._specWide, "`", $._hoonWide), //`specWide`hoonWide
     nullList: ($) => prec(1, seq("`", $._hoonWide)),
     bunt: ($) => prec(1, seq("*", $._specWide)),
     factoryGate: ($) => prec(1, seq(",", $._specWide)),
     twoArgstoN: ($) =>
-      seq(":(", $._hoonWide, repeat1(seq($._space, $._hoonWide)), ")"),
+      seq(":(", $._hoonWide, repeat1(seq(" ", $._hoonWide)), ")"),
     composeExpressions: ($) =>
       prec(3, seq($._hoonWide, repeat1(seq(":", $._hoonWide)))),
     logicalOr: ($) =>
-      seq("|(", $._hoonWide, repeat(seq($._space, $._hoonWide)), ")"),
+      seq("|(", $._hoonWide, repeat(seq(" ", $._hoonWide)), ")"),
     logicalAnd: ($) =>
-      seq("&(", $._hoonWide, repeat(seq($._space, $._hoonWide)), ")"),
+      seq("&(", $._hoonWide, repeat(seq(" ", $._hoonWide)), ")"),
     logicalNot: ($) => prec.left(2, seq("!", $._hoonWide)),
     addCell: ($) =>
       seq(choice($.name, $.boolean, $.number), choice("+", "/"), $._hoonWide),
     appendCell: ($) =>
       prec(3, seq($._hoonWide, repeat1(seq("^", $._hoonWide)))),
-    tank: ($) => seq(">", $._hoonWide, repeat(seq($._space, $._hoonWide)), "<"),
+    tank: ($) => seq(">", $._hoonWide, repeat(seq(" ", $._hoonWide)), "<"),
     tankTape: ($) =>
-      seq("<", $._hoonWide, repeat(seq($._space, $._hoonWide)), ">"),
+      seq("<", $._hoonWide, repeat(seq(" ", $._hoonWide)), ">"),
     parent: ($) => seq(repeat1("^"), $.name),
 
 
-    lineComment: ($) => seq(optional($._space), "::", /[^\n]*/),
+    lineComment: ($) => seq(optional(" "), "::", /[^\n]*/),
     name: ($) => choice("$", /[a-zA-Z][a-zA-Z0-9-]*/),
     // number: ($) =>
     //   prec.right(
@@ -1911,11 +1915,11 @@ _labelWide: ($) => choice(
         )
       ),
     aura: ($) => /@[a-zA-Z]*/,
-    _space: ($) => " ",
+
     _Gap: ($) => prec.left(repeat1(/ *\n+ *|  +/)),
     fullContext: ($) => ".",
     stripFace: ($) => ",",
-    lark: ($) => choice("+", "-", /(([-+][<>])+)|([-+]([<>][-+])+)/),
+    lark: ($) => /(([-+][<>])+)|([-+]([<>][-+])+)/,
     knot: ($) => seq("~.", /[0-9a-zA-Z~_.-]*/),
     string: ($) => choice($.tapeOrCord, $.knot),
     date: ($) =>
@@ -1996,7 +2000,7 @@ _labelWide: ($) => choice(
       '=',
       field('spec', choice($.name, $.aura, $.term, $.mold, $.cell, $.gateCall))
     )),
-    
+
     shorthandFaceSpec: ($) => prec.left(10, seq(
       '=',
       field('name', $.name)
