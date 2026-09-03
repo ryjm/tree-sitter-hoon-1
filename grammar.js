@@ -4,10 +4,15 @@ module.exports = grammar({
     rules: {
       source_file: ($) =>
         seq(
+          // A leading `optional($._Gap)' is required: `lineComment' does not
+          // consume its newline, so a file that opens with a `::' comment has
+          // a gap before its first form and failed to parse without this.
+          optional($._Gap),
           $._hoonTall,
-          repeat1(seq($._Gap, $._hoonTall)),
-          // choice($.sailExpression, $._hoonTall),
-          // repeat(seq($._Gap, choice($._hoonTall, $.sailExpression))),
+          // `repeat1' here forces every file to contain at least two top-level
+          // forms; a file holding a single one (`|%  ...  --') made the parser
+          // fabricate a MISSING `.' at EOF to satisfy the second.
+          repeat(seq($._Gap, $._hoonTall)),
           optional($._Gap)
         ),
 
@@ -1405,8 +1410,13 @@ _labelWide: ($) => choice(
     siglusWide: ($) => seq(alias("~+", $.rune), "(", $._hoonWide, ")"),
     sigfasWide: ($) =>
       seq(alias("~/", $.rune), "(", $._chumTall, $._space, $._hoonWide, ")"),
+    // `sigpamTall' already accepts the `>'/`>>'/`>>>' priority marker; the
+    // wide form did not, so the ubiquitous `~&(>>> %msg !!)' debug idiom
+    // failed and took the whole enclosing core down with it.
     sigpamWide: ($) =>
-      seq(alias("~&", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
+      seq(alias("~&", $.rune), "(",
+          optional(seq(choice(">", ">>", ">>>"), $._space)),
+          $._hoonWide, $._space, $._hoonWide, ")"),
     sigtisWide: ($) =>
       seq(alias("~=", $.rune), "(", $._hoonWide, $._space, $._hoonWide, ")"),
     sigwutWide: ($) =>
@@ -1881,14 +1891,20 @@ _labelWide: ($) => choice(
               ) //@uw
             )
           ),
-          seq(".", optional(choice("~", "~~", "~~~")), /[0-9]+(.[0-9]+)?/) //@rh,@rs,@rd,@rq
+          // Float literals: the sign follows the precision marker, so negative
+          // values read `.-0.3' / `.~-1.5'.  The optional `-' was missing, and
+          // the fractional dot was unescaped -- `(.[0-9]+)?' matched any
+          // character, so `.0x5' lexed as a float.
+          seq(".", optional(choice("~", "~~", "~~~")), optional("-"), /[0-9]+(\.[0-9]+)?/) //@rh,@rs,@rd,@rq
         )
       ),
+    // A galaxy is a single suffix syllable (`~zod'), so the leading prefix
+    // syllable is optional; requiring it rejected every galaxy name.
     phonemic: ($) =>
       seq(
         optional("."),
         "~",
-        /[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz](-[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz]){0,3}/
+        /([bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz])?[bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz](-[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz]){0,3}/
       ), //@q
     unicode: ($) => seq("~-~", /(\w|\.)+/),
     boolean: ($) => choice("&", "|", ".y", ".n"),

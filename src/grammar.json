@@ -5,11 +5,23 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_Gap"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "_hoonTall"
         },
         {
-          "type": "REPEAT1",
+          "type": "REPEAT",
           "content": {
             "type": "SEQ",
             "members": [
@@ -9079,6 +9091,40 @@
           "value": "("
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ">"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ">>"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ">>>"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_space"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "_hoonWide"
         },
@@ -12502,8 +12548,20 @@
                 ]
               },
               {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "-"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
                 "type": "PATTERN",
-                "value": "[0-9]+(.[0-9]+)?"
+                "value": "[0-9]+(\\.[0-9]+)?"
               }
             ]
           }
@@ -12531,7 +12589,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz](-[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz]){0,3}"
+          "value": "([bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz])?[bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz](-[bcdfghjklmnpqrstvwxz][aeiou][bcdfghjklmnpqrstvwxz][bcdfghjklmnpqrstvwxz][aeiouy][bcdfghjklmnpqrstvwxz]){0,3}"
         }
       ]
     },
