@@ -117,7 +117,7 @@ module.exports = grammar({
         $.mold,
         $.cell,
         $.normalize,
-        $._bucWke]oide,
+        $._bucWide,
         seq("$;", "(", $._specWide, ")"),
         $.gateCall,
         $.cenhepWide,
