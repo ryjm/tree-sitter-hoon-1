@@ -1676,6 +1676,9 @@ _labelWide: ($) => choice(
     rune: ($) => "感#)@!(",
       sailExpression: ($) => choice($.sailTagTall, $.sailTagWide),
 
+      // Runes that may appear directly as tall-tag content.  `;/' (micfas)
+      // belongs here: `;/  "text"' is the explicit form of a text line and is
+      // extremely common.  `;;' (micmic) normalizes a manx in place.
       _sailRunes: ($) => choice(
         $.mictisTall,
         $.mictisWide,
@@ -1683,18 +1686,68 @@ _labelWide: ($) => choice(
         $.miclusWide,
         $.mictarTall,
         $.mictarWide,
-        $.mictisTall,
-        $.mictisWide
+        $.micfasTall,
+        $.micfasWide,
+        $.micmicTall,
+        $.micmicWide
       ),
 
+      // A text line: `;' followed by whitespace takes the rest of the line as
+      // a tape, with `{...}' interpolations.  The old rule accepted only a
+      // single optional `name' after the `;', so `; no files match' and
+      // `; count is {<n>} ok' both failed to parse.
+      // `prec.right' for the same reason as `sailBareTextLine': a trailing
+      // interpolation must extend this line, not open the next content item.
+      sailTextLine: ($) => prec.right(seq(
+        alias(";", $.rune),
+        $._space,
+        optional($.sailText)
+      )),
 
-      sailTagContent: ($) => prec.left(repeat1(seq(
+      // `stringContent' is an external-scanner token, only produced inside a
+      // string, so sail text needs its own chunk token.  It stops at `{' so
+      // interpolations split it, and never crosses a newline so a text line
+      // ends where the line ends.
+      //
+      // `_space' is a member of the choice rather than the chunk carrying a
+      // raised precedence.  On an equal-length match tree-sitter's lexer
+      // prefers a string literal over a regex, so the lone space in
+      // `;span: {<a>} {b}' is lexed as `_space'; accepting it here is what
+      // makes that parse.  Forcing the chunk to win with `token(prec(1, ...))'
+      // also worked, but a top-precedence `[^{\n]+' outranks every other token
+      // wherever the parser considers it valid and corrupted unrelated hoon.
+      sailText: ($) => prec.right(repeat1(choice($.interpolation, $.sailTextChunk, $._space))),
+      sailTextChunk: ($) => /[^{\n]+/,
+
+      // An untagged content line that begins with an interpolation, as in the
+      // Sail reference's `{<our>} {<now>} {<`@ux`(end 6 eny)>}'.  Safe because
+      // `{' starts nothing else at content position.
+      //
+      // Prose untagged lines (`This is some good content.') are deliberately
+      // NOT accepted.  Deciding that a content line is prose rather than a
+      // hoon expression needs the line/indentation context Hoon's own parser
+      // has and a context-free grammar does not: every token shape tried here
+      // either never applied (a plain `name' outranks it, since tree-sitter's
+      // lexer ranks precedence above match length) or swallowed tall
+      // attributes and nested tags wholesale.  Write `; some text' instead,
+      // which is both supported and the more common style.
+      //
+      // `prec.right' so a trailing interpolation keeps extending this line
+      // rather than being reduced and reparsed as the next content item.
+      sailBareTextLine: ($) => prec.right(seq(
+        $.interpolation,
+        optional($.sailText)
+      )),
+
+      sailTagContent: ($) => seq(
+        optional($._Gap),
         field("content", choice(
-          seq(optional($._Gap), ";", choice($._space, $._Gap), optional($.name)),
-          seq(optional($._Gap), $._sailRunes),
-          seq(optional($._Gap), $.sailExpression),
+          $.sailTextLine,
+          $._sailRunes,
+          $.sailExpression,
+          $.sailBareTextLine
         ))
-      ))),
+      ),
 
       sailTagTall: ($) => seq(
         seq(";", field("tagName", $.name),
@@ -1702,17 +1755,32 @@ _labelWide: ($) => choice(
           $._Gap
         ),
         optional(field("tallAttributes", repeat($.sailTagAttributesTall))),
-        repeat(field("tagContent", $.sailTagContent)),
-        seq(optional($._Gap), $.seriesTerminator),
+        choice(
+          // Self-closing tall tag: tall attributes, then `;' directly, with no
+          // content and no `=='.  This is how every element in an svg symbol
+          // table is written -- `=vector-effect  "non-scaling-stroke";' -- and
+          // requiring `seriesTerminator' rejected the whole form.
+          ";",
+          seq(
+            repeat(field("tagContent", $.sailTagContent)),
+            optional($._Gap),
+            $.seriesTerminator
+          )
+        )
       ),
 
       sailTagWide: ($) => prec.left(seq(
         seq(";", field("tagName", $.name)),
         optional(field("attributes", repeat($.sailTagAttributesWide))),
         choice(
-          seq(":", $._space, field("content", $.sailContent)), // Inline content
+          // The two `:' content forms are told apart by the space, which is
+          // unambiguous because whitespace is not in `extras' and so no hoon
+          // expression can begin with one:
+          //   `;script:'''...''''  -- no space: content is a hoon expression.
+          //   `;p: some words'     -- a space switches to text-to-end-of-line.
+          seq(":", field("content", $._hoonWide)),
+          seq(":", $._space, optional(field("content", $.sailText))),
           ";"
-
         ))
       ),
       sailTagAttributesTall: ($) => seq($._Gap, field("attribute", $.sailAttributeTall)),
@@ -1725,19 +1793,39 @@ _labelWide: ($) => choice(
         field("src", $.sailSrc)
       ),
 
-      sailAttributeWide: ($) => seq("(", field("pairs", commaSep($.sailAttributePair)), ")"),
-      sailAttributeTall: ($) => seq("=", field("name", $.name), $._Gap, field("value", $.string)),
-      sailAttributePair: ($) => seq(field("name", $.name), $._space, field("value", $.string)),
+      // Attributes are written `(class "a", id "b")' -- with a space after the
+      // comma.  Whitespace is not in `extras', so the separator must allow it
+      // explicitly, and it has to reuse the `_space' rule: a bare " " literal
+      // here becomes a second token for the same character and wrecks the lexer.
+      sailAttributeWide: ($) => seq(
+        "(",
+        field("pairs", optional(seq(
+          $.sailAttributePair,
+          repeat(seq(",", optional($._space), $.sailAttributePair))
+        ))),
+        ")"
+      ),
+      // Attribute values are arbitrary wide hoon, not just literals: real
+      // markup is full of `=href  desk-href' and `=value  (trip x)'.
+      //
+      // `prec(2)' keeps `=attr  wing' an attribute: with a bare wing value the
+      // line is otherwise ambiguous against reading the value as a bare text
+      // content line, and the text reading was winning.
+      sailAttributeTall: ($) => seq("=", field("name", $.name), $._Gap, field("value", $._hoonWide)),
+      sailAttributePair: ($) => seq(field("name", $.name), $._space, field("value", $._hoonWide)),
 
       sailId: ($) => prec(1, seq("#", field("value", $.name))),
       sailClass: ($) => prec(1, seq(".", field("value", $.name))),
-      sailHref: ($) => prec(1, seq("/", field("value", $.name))),
-      sailSrc: ($) => prec(1, seq("@", field("value", $.name))),
-
-      sailContent: ($) =>  prec(1, choice(
-        field("string", $.string),
-        field("value", $._value)
-      )),
+      // The reference spells these with a tape -- `;a/"urbit.org":' and
+      // `;img@"example.png";' -- so a bare `name' is not enough.
+      //
+      // `_tapeOrCord' rather than `string': `string' ends in `tapeOrCord',
+      // which greedily repeats `. <string>' for dotted concatenation, and that
+      // is ambiguous with the `.class' sugar that may follow a tag's src/href.
+      // Aliasing the undotted rule keeps the node named `string' while leaving
+      // ordinary hoon string concatenation alone.
+      sailHref: ($) => prec(1, seq("/", field("value", choice(alias($._tapeOrCord, $.string), $.name)))),
+      sailSrc: ($) => prec(1, seq("@", field("value", choice(alias($._tapeOrCord, $.string), $.name)))),
     _irregularForms: ($) =>
       choice(
         $.normalize,
@@ -2054,7 +2142,4 @@ _labelWide: ($) => choice(
   ],
   externals: ($) => [$.indent, $._stringStart, $.stringContent, $._stringEnd],
 });
-function commaSep(rule) {
-  return optional(seq(rule, repeat(seq(",", rule))));
-}
 

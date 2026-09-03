@@ -140786,6 +140786,108 @@
     "type": "sailAttributePair",
     "named": true,
     "fields": {
+      "irregularForms": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -140796,12 +140898,1046 @@
           }
         ]
       },
-      "value": {
+      "runeWide": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "aura",
+            "named": true
+          },
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bitcoinAddress",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "date",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "fullContext",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "ipAddress",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "lark",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "mold",
+            "named": true
+          },
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "phonemic",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "specialIndex",
+            "named": true
+          },
+          {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "stripFace",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "term",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "unicode",
+            "named": true
+          },
+          {
+            "type": "wingPath",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
             "named": true
           }
         ]
@@ -140812,6 +141948,108 @@
     "type": "sailAttributeTall",
     "named": true,
     "fields": {
+      "irregularForms": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -140822,12 +142060,1046 @@
           }
         ]
       },
-      "value": {
+      "runeWide": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "aura",
+            "named": true
+          },
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bitcoinAddress",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "date",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "fullContext",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "ipAddress",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "lark",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "mold",
+            "named": true
+          },
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "phonemic",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "specialIndex",
+            "named": true
+          },
+          {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "stripFace",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "term",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "unicode",
+            "named": true
+          },
+          {
+            "type": "wingPath",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
             "named": true
           }
         ]
@@ -140855,6 +143127,25 @@
     }
   },
   {
+    "type": "sailBareTextLine",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "interpolation",
+          "named": true
+        },
+        {
+          "type": "sailText",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "sailClass",
     "named": true,
     "fields": {
@@ -140871,15 +143162,1442 @@
     }
   },
   {
-    "type": "sailContent",
+    "type": "sailExpression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "sailTagTall",
+          "named": true
+        },
+        {
+          "type": "sailTagWide",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sailHref",
     "named": true,
     "fields": {
-      "string": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailId",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailSrc",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailTagAttributesTall",
+    "named": true,
+    "fields": {
+      "attribute": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "sailAttributeTall",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailTagAttributesWide",
+    "named": true,
+    "fields": {
+      "attribute": {
         "multiple": false,
         "required": false,
         "types": [
           {
+            "type": "sailAttributeWide",
+            "named": true
+          }
+        ]
+      },
+      "class": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sailClass",
+            "named": true
+          }
+        ]
+      },
+      "href": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sailHref",
+            "named": true
+          }
+        ]
+      },
+      "id": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sailId",
+            "named": true
+          }
+        ]
+      },
+      "src": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sailSrc",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailTagContent",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "micfasTall",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "miclusTall",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicTall",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "mictarTall",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisTall",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "sailBareTextLine",
+            "named": true
+          },
+          {
+            "type": "sailExpression",
+            "named": true
+          },
+          {
+            "type": "sailTextLine",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sailTagTall",
+    "named": true,
+    "fields": {
+      "tagContent": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "sailTagContent",
+            "named": true
+          }
+        ]
+      },
+      "tagName": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      },
+      "tallAttributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "sailTagAttributesTall",
+            "named": true
+          }
+        ]
+      },
+      "wideAttributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "sailTagAttributesWide",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "seriesTerminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sailTagWide",
+    "named": true,
+    "fields": {
+      "attributes": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "sailTagAttributesWide",
+            "named": true
+          }
+        ]
+      },
+      "content": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "aura",
+            "named": true
+          },
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bitcoinAddress",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "date",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "fullContext",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "ipAddress",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "lark",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "mold",
+            "named": true
+          },
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "path",
+            "named": true
+          },
+          {
+            "type": "phonemic",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "sailText",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "specialIndex",
+            "named": true
+          },
+          {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "stripFace",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "term",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "unicode",
+            "named": true
+          },
+          {
+            "type": "wingPath",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
+            "named": true
+          }
+        ]
+      },
+      "irregularForms": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "addCell",
+            "named": true
+          },
+          {
+            "type": "appendCell",
+            "named": true
+          },
+          {
+            "type": "bunt",
+            "named": true
+          },
+          {
+            "type": "cell",
+            "named": true
+          },
+          {
+            "type": "composeExpressions",
+            "named": true
+          },
+          {
+            "type": "equality",
+            "named": true
+          },
+          {
+            "type": "factoryGate",
+            "named": true
+          },
+          {
+            "type": "gateCall",
+            "named": true
+          },
+          {
+            "type": "increment",
+            "named": true
+          },
+          {
+            "type": "logicalAnd",
+            "named": true
+          },
+          {
+            "type": "logicalNot",
+            "named": true
+          },
+          {
+            "type": "logicalOr",
+            "named": true
+          },
+          {
+            "type": "normalize",
+            "named": true
+          },
+          {
+            "type": "nullList",
+            "named": true
+          },
+          {
+            "type": "parent",
+            "named": true
+          },
+          {
+            "type": "pullArmInDoor",
+            "named": true
+          },
+          {
+            "type": "resolveWingWithChanges",
+            "named": true
+          },
+          {
+            "type": "tank",
+            "named": true
+          },
+          {
+            "type": "tankTape",
+            "named": true
+          },
+          {
+            "type": "twoArgstoN",
+            "named": true
+          },
+          {
+            "type": "typeCast",
+            "named": true
+          },
+          {
+            "type": "typeUnion",
+            "named": true
+          },
+          {
+            "type": "wrapFace",
+            "named": true
+          },
+          {
+            "type": "wrapFace2",
+            "named": true
+          }
+        ]
+      },
+      "runeWide": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "barbucWide",
+            "named": true
+          },
+          {
+            "type": "barcolWide",
+            "named": true
+          },
+          {
+            "type": "bardotWide",
+            "named": true
+          },
+          {
+            "type": "barhepWide",
+            "named": true
+          },
+          {
+            "type": "barsigWide",
+            "named": true
+          },
+          {
+            "type": "bartarWide",
+            "named": true
+          },
+          {
+            "type": "bartisWide",
+            "named": true
+          },
+          {
+            "type": "barwutWide",
+            "named": true
+          },
+          {
+            "type": "bucbarWide",
+            "named": true
+          },
+          {
+            "type": "buccabWide",
+            "named": true
+          },
+          {
+            "type": "buccenWide",
+            "named": true
+          },
+          {
+            "type": "buccolWide",
+            "named": true
+          },
+          {
+            "type": "bucgalWide",
+            "named": true
+          },
+          {
+            "type": "bucgarWide",
+            "named": true
+          },
+          {
+            "type": "buchepWide",
+            "named": true
+          },
+          {
+            "type": "bucketWide",
+            "named": true
+          },
+          {
+            "type": "buclusWide",
+            "named": true
+          },
+          {
+            "type": "bucpamWide",
+            "named": true
+          },
+          {
+            "type": "bucpatWide",
+            "named": true
+          },
+          {
+            "type": "bucsigWide",
+            "named": true
+          },
+          {
+            "type": "buctisWide",
+            "named": true
+          },
+          {
+            "type": "bucwutWide",
+            "named": true
+          },
+          {
+            "type": "cencabWide",
+            "named": true
+          },
+          {
+            "type": "cencolWide",
+            "named": true
+          },
+          {
+            "type": "cendotWide",
+            "named": true
+          },
+          {
+            "type": "cenhepWide",
+            "named": true
+          },
+          {
+            "type": "cenketWide",
+            "named": true
+          },
+          {
+            "type": "cenlusWide",
+            "named": true
+          },
+          {
+            "type": "censigWide",
+            "named": true
+          },
+          {
+            "type": "centarWide",
+            "named": true
+          },
+          {
+            "type": "centisWide",
+            "named": true
+          },
+          {
+            "type": "colcabWide",
+            "named": true
+          },
+          {
+            "type": "colhepWide",
+            "named": true
+          },
+          {
+            "type": "colketWide",
+            "named": true
+          },
+          {
+            "type": "collusWide",
+            "named": true
+          },
+          {
+            "type": "colsigWide",
+            "named": true
+          },
+          {
+            "type": "coltarWide",
+            "named": true
+          },
+          {
+            "type": "dotketWide",
+            "named": true
+          },
+          {
+            "type": "dotlusWide",
+            "named": true
+          },
+          {
+            "type": "dottarWide",
+            "named": true
+          },
+          {
+            "type": "dottisWide",
+            "named": true
+          },
+          {
+            "type": "dotwutWide",
+            "named": true
+          },
+          {
+            "type": "ketbarWide",
+            "named": true
+          },
+          {
+            "type": "ketcolWide",
+            "named": true
+          },
+          {
+            "type": "ketdotWide",
+            "named": true
+          },
+          {
+            "type": "kethepWide",
+            "named": true
+          },
+          {
+            "type": "ketlusWide",
+            "named": true
+          },
+          {
+            "type": "ketpamWide",
+            "named": true
+          },
+          {
+            "type": "ketsigWide",
+            "named": true
+          },
+          {
+            "type": "kettarWide",
+            "named": true
+          },
+          {
+            "type": "kettisWide",
+            "named": true
+          },
+          {
+            "type": "ketwutWide",
+            "named": true
+          },
+          {
+            "type": "miccolWide",
+            "named": true
+          },
+          {
+            "type": "micfasWide",
+            "named": true
+          },
+          {
+            "type": "micgalWide",
+            "named": true
+          },
+          {
+            "type": "miclusWide",
+            "named": true
+          },
+          {
+            "type": "micmicWide",
+            "named": true
+          },
+          {
+            "type": "micsigWide",
+            "named": true
+          },
+          {
+            "type": "mictarWide",
+            "named": true
+          },
+          {
+            "type": "mictisWide",
+            "named": true
+          },
+          {
+            "type": "sigbarWide",
+            "named": true
+          },
+          {
+            "type": "sigbucWide",
+            "named": true
+          },
+          {
+            "type": "sigcabWide",
+            "named": true
+          },
+          {
+            "type": "sigfasWide",
+            "named": true
+          },
+          {
+            "type": "siggalWide",
+            "named": true
+          },
+          {
+            "type": "siggarWide",
+            "named": true
+          },
+          {
+            "type": "siglusWide",
+            "named": true
+          },
+          {
+            "type": "sigpamWide",
+            "named": true
+          },
+          {
+            "type": "sigtisWide",
+            "named": true
+          },
+          {
+            "type": "sigwutWide",
+            "named": true
+          },
+          {
+            "type": "sigzapWide",
+            "named": true
+          },
+          {
+            "type": "tisbarWide",
+            "named": true
+          },
+          {
+            "type": "tiscolWide",
+            "named": true
+          },
+          {
+            "type": "tiscomWide",
+            "named": true
+          },
+          {
+            "type": "tisdotWide",
+            "named": true
+          },
+          {
+            "type": "tisfasWide",
+            "named": true
+          },
+          {
+            "type": "tisgalWide",
+            "named": true
+          },
+          {
+            "type": "tisgarWide",
+            "named": true
+          },
+          {
+            "type": "tishepWide",
+            "named": true
+          },
+          {
+            "type": "tisketWide",
+            "named": true
+          },
+          {
+            "type": "tislusWide",
+            "named": true
+          },
+          {
+            "type": "tismicWide",
+            "named": true
+          },
+          {
+            "type": "tissigWide",
+            "named": true
+          },
+          {
+            "type": "tistarWide",
+            "named": true
+          },
+          {
+            "type": "tiswutWide",
+            "named": true
+          },
+          {
+            "type": "wutbarWide",
+            "named": true
+          },
+          {
+            "type": "wutcolWide",
+            "named": true
+          },
+          {
+            "type": "wutdotWide",
+            "named": true
+          },
+          {
+            "type": "wutgalWide",
+            "named": true
+          },
+          {
+            "type": "wutgarWide",
+            "named": true
+          },
+          {
+            "type": "wuthepWide",
+            "named": true
+          },
+          {
+            "type": "wutketWide",
+            "named": true
+          },
+          {
+            "type": "wutlusWide",
+            "named": true
+          },
+          {
+            "type": "wutpamWide",
+            "named": true
+          },
+          {
+            "type": "wutpatWide",
+            "named": true
+          },
+          {
+            "type": "wutsigWide",
+            "named": true
+          },
+          {
+            "type": "wuttisWide",
+            "named": true
+          },
+          {
+            "type": "wutzapWide",
+            "named": true
+          },
+          {
+            "type": "zapcolWide",
+            "named": true
+          },
+          {
+            "type": "zapcomWide",
+            "named": true
+          },
+          {
+            "type": "zapdotWide",
+            "named": true
+          },
+          {
+            "type": "zapgalWide",
+            "named": true
+          },
+          {
+            "type": "zapgarWide",
+            "named": true
+          },
+          {
+            "type": "zapmicWide",
+            "named": true
+          },
+          {
+            "type": "zappatWide",
+            "named": true
+          },
+          {
+            "type": "zaptisWide",
+            "named": true
+          },
+          {
+            "type": "zapwutWide",
+            "named": true
+          },
+          {
+            "type": "zapzap",
+            "named": true
+          }
+        ]
+      },
+      "tagName": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
             "named": true
           }
         ]
@@ -140965,282 +144683,41 @@
     }
   },
   {
-    "type": "sailExpression",
+    "type": "sailText",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "sailTagTall",
+          "type": "interpolation",
           "named": true
         },
         {
-          "type": "sailTagWide",
+          "type": "sailTextChunk",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "sailHref",
+    "type": "sailTextLine",
     "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "name",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailId",
-    "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "name",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailSrc",
-    "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "name",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailTagAttributesTall",
-    "named": true,
-    "fields": {
-      "attribute": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "sailAttributeTall",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailTagAttributesWide",
-    "named": true,
-    "fields": {
-      "attribute": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailAttributeWide",
-            "named": true
-          }
-        ]
-      },
-      "class": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailClass",
-            "named": true
-          }
-        ]
-      },
-      "href": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailHref",
-            "named": true
-          }
-        ]
-      },
-      "id": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailId",
-            "named": true
-          }
-        ]
-      },
-      "src": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailSrc",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailTagContent",
-    "named": true,
-    "fields": {
-      "content": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ";",
-            "named": false
-          },
-          {
-            "type": "miclusTall",
-            "named": true
-          },
-          {
-            "type": "miclusWide",
-            "named": true
-          },
-          {
-            "type": "mictarTall",
-            "named": true
-          },
-          {
-            "type": "mictarWide",
-            "named": true
-          },
-          {
-            "type": "mictisTall",
-            "named": true
-          },
-          {
-            "type": "mictisWide",
-            "named": true
-          },
-          {
-            "type": "name",
-            "named": true
-          },
-          {
-            "type": "sailExpression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "sailTagTall",
-    "named": true,
-    "fields": {
-      "tagContent": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "sailTagContent",
-            "named": true
-          }
-        ]
-      },
-      "tagName": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "name",
-            "named": true
-          }
-        ]
-      },
-      "tallAttributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "sailTagAttributesTall",
-            "named": true
-          }
-        ]
-      },
-      "wideAttributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "sailTagAttributesWide",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "seriesTerminator",
+          "type": "rune",
+          "named": true
+        },
+        {
+          "type": "sailText",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "sailTagWide",
-    "named": true,
-    "fields": {
-      "attributes": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "sailTagAttributesWide",
-            "named": true
-          }
-        ]
-      },
-      "content": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "sailContent",
-            "named": true
-          }
-        ]
-      },
-      "tagName": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "name",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -170989,15 +174466,27 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
+        {
+          "type": "interpolation",
+          "named": true
+        },
         {
           "type": "knot",
           "named": true
         },
         {
+          "type": "stringContent",
+          "named": true
+        },
+        {
           "type": "tapeOrCord",
+          "named": true
+        },
+        {
+          "type": "tripleQuotedString",
           "named": true
         }
       ]
@@ -268072,6 +271561,10 @@
   },
   {
     "type": "rune",
+    "named": true
+  },
+  {
+    "type": "sailTextChunk",
     "named": true
   },
   {
